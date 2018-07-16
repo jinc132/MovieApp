@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import MovieRow from './MovieRow';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import './style.css';
 
 class App extends Component {
     constructor(props) {
         super(props);
+        this.searchDatabase = this.searchDatabase.bind(this);
         this.state = {
             movies: [],
             menu: false,
@@ -13,7 +15,15 @@ class App extends Component {
             singleMovie: {}
         };
     }
-
+    searchDatabase(searchMovie){
+        let temp = this;
+        let data = MovieRow.movieDatabase(searchMovie);
+        data.catch(function (er){
+          this.setState({movies:[]});
+        }).then((data) => {
+          temp.setState({movies: data.results});
+        });
+    }
     componentDidMount() {
         fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=ad1fdbb0dcebf0d1cf8ffbfd5c0eb777&language=en-US&page=1')
             .then((res) => res.json())
@@ -21,7 +31,6 @@ class App extends Component {
                 this.setState({ movies: data.results });
             });
     }
-
     toggleMenu() {
         let toggle = this.state.menu;
         this.setState({
@@ -33,18 +42,20 @@ class App extends Component {
         return (
             <div>
                 <header>
-
+                <Search search={this.searchDatabase}/>
                 </header>
                 <main>
                     <div id="movieList" className="col-9">
                         <MovieList movies= {this.state.movies} adoptCallback={(individualMovie) => this.selectedMovie(individualMovie)} />
                         <Popup movie={this.state.singleMovie} toggle={() => this.toggle()} modal={this.state.modal} />
                     </div>
+                    <footer>Data from
+                        <a href="https://www.themoviedb.org/documentation/api?language=en">The Movie DB</a>
+                    </footer>
                 </main>
             </div>
         );
     }
-
     toggle() {
         let mode = this.state.modal;
         this.setState({
@@ -115,5 +126,47 @@ class MovieCard extends Component {
         );
     }
 }
+
+class CheckBoxes extends Component {
+
+    handleClick(maxValue) {
+        this.props.toggleCallback(maxValue)
+    }
+
+    render() {
+        return (
+            <ol className="checkbox">
+                <li onClick={() => this.handleClick(7)}>MUST SEE!! (Rate > 7)</li>
+                <li onClick={() => this.handleClick(5)}>Movies to kill time (Rate > 5)</li>
+                <li onClick={() => this.handleClick(0)}>See all the movies</li>
+            </ol >
+        );
+    }
+}
+
+export class Search extends Component{
+    constructor(props){
+      super(props);
+      this.state = {value: ''};
+      this.changeSearch = this.changeSearch.bind(this);
+      this.clickButton = this.clickButton.bind(this);
+    }
+    changeSearch(e){
+      this.setState({value: e.target.value});
+      console.log(e.target.value)
+    }
+    clickButton(){
+      this.props.search(this.state.value);
+      console.log("button")
+    }
+    render(){
+      return(
+        <div className = "searchMovie">
+          <input type="text" className="search" name="q" placeholder="Search Movie" onChange = {this.changeSearch}/>
+          <button type = "button" className = "button" onClick = {this.clickButton}>Search</button>
+        </div>
+      )
+    }
+  }
 
 export default App;
