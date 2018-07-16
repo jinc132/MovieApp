@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from 'react-bootstrap';
+import {} from 'reactstrap';;
 
 class App extends Component {
     constructor(props) {
@@ -22,10 +22,6 @@ class App extends Component {
                 <header>
                     <Menu toggle={() => this.toggleMenu()} />
                 </header>
-                <main>
-                </main>
-                <footer>
-                </footer>
             </div>
         );
     }
@@ -36,19 +32,20 @@ class Menu extends Component {
         return (
             <div>
                 <Navbar>
-                    <Nav>
-                        <NavDropdown eventKey={3} id="basic-nav-dropdown">
-                            <MenuItem eventKey={3.1}>Action</MenuItem>
-                            <MenuItem eventKey={3.2}>Another action</MenuItem>
-                            <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey={3.4}>Separated link</MenuItem>
-                        </NavDropdown>
-                    </Nav >
-                </Navbar >
-            </div>
+                    <Navbar.Collapse>
+                        <Nav>
+                            <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
+                                <MenuItem eventKey={3.1}>Action</MenuItem>
+                                <MenuItem eventKey={3.2}>Another action</MenuItem>
+                                <MenuItem eventKey={3.3}>Something else here</MenuItem>
+                                <MenuItem divider />
+                                <MenuItem eventKey={3.3}>Separated link</MenuItem>
+                            </NavDropdown>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            </div >
         );
     }
-
 }
 export default App;
