@@ -20,7 +20,7 @@ class App extends Component {
         return (
             <div>
                 <header>
-                    <Menu toggle={() => this.toggleMenu()}/>
+                    <Menu toggle={() => this.toggleMenu()} />
                 </header>
                 <main>
                 </main>
@@ -32,6 +32,23 @@ class App extends Component {
 }
 
 class Menu extends Component {
+    render() {
+        return (
+            <div>
+                <Navbar>
+                    <Nav>
+                        <NavDropdown eventKey={3} id="basic-nav-dropdown">
+                            <MenuItem eventKey={3.1}>Action</MenuItem>
+                            <MenuItem eventKey={3.2}>Another action</MenuItem>
+                            <MenuItem eventKey={3.3}>Something else here</MenuItem>
+                            <MenuItem divider />
+                            <MenuItem eventKey={3.4}>Separated link</MenuItem>
+                        </NavDropdown>
+                    </Nav >
+                </Navbar >
+            </div>
+        );
+    }
 
 }
 export default App;
