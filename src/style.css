@@ -18,18 +18,13 @@ footer{
     height: 500px;
 }
 
-.modal-backdrop {
-    opacity: .7;
-}
-
 .movie-deck .card {
-    flex-wrap: wrap;
     display: inline-block;
-    max-height: unset;
+    flex-wrap: wrap;
     flex-basis: 200px;
+    margin: .9rem;
     align-items: center;
     text-align: center;
-    margin: .5rem;
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
 }
@@ -43,3 +38,8 @@ footer{
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.modal-backdrop {
+    opacity: .7;
+}
+
