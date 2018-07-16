@@ -7,8 +7,18 @@ class App extends Component {
         super(props);
         this.state = {
             movies: [],
-            menu: false
+            menu: false,
+            modal: false,
+            singleMovie: {}
         };
+    }
+
+    componentDidMount() {
+        fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=ad1fdbb0dcebf0d1cf8ffbfd5c0eb777&language=en-US&page=1')
+            .then((res) => res.json())
+            .then((data) => {
+                this.setState({ movies: data.results });
+            });
     }
 
     toggleMenu() {
@@ -101,23 +111,6 @@ class MovieCard extends Component {
                     <p className="card-date">{movieCard.release_date}</p>
                 </div>
             </div>
-        );
-    }
-}
-
-class CheckBoxes extends Component {
-
-    handleClick(maxValue) {
-        this.props.toggleCallback(maxValue)
-    }
-
-    render() {
-        return (
-            <ol className="checkbox">
-                <li onClick={() => this.handleClick(7)}>MUST SEE!! (Rate > 7)</li>
-                <li onClick={() => this.handleClick(5)}>Movies to kill time (Rate > 5)</li>
-                <li onClick={() => this.handleClick(0)}>See all the movies</li>
-            </ol >
         );
     }
 }
