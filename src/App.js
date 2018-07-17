@@ -127,23 +127,6 @@ class MovieCard extends Component {
     }
 }
 
-class CheckBoxes extends Component {
-
-    handleClick(maxValue) {
-        this.props.toggleCallback(maxValue)
-    }
-
-    render() {
-        return (
-            <ol className="checkbox">
-                <li onClick={() => this.handleClick(7)}>MUST SEE!! (Rate > 7)</li>
-                <li onClick={() => this.handleClick(5)}>Movies to kill time (Rate > 5)</li>
-                <li onClick={() => this.handleClick(0)}>See all the movies</li>
-            </ol >
-        );
-    }
-}
-
 export class Search extends Component{
     constructor(props){
       super(props);
@@ -163,7 +146,7 @@ export class Search extends Component{
       return(
         <div className = "searchMovie">
           <input type="text" className="search" name="q" placeholder="Search Movie" onChange = {this.changeSearch}/>
-          <button type = "button" className = "button" onClick = {this.clickButton}>Search</button>
+          <button type = "button" className = "button" onClick = {this.clickButton}><i className="fa fa-search" onClick = {this.clickButton}></i></button>
         </div>
       )
     }
