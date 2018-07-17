@@ -4,6 +4,7 @@ import MoviePage from './ViewMovie';
 import { ButtonDropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
 import { Route, Switch, Redirect, NavLink } from 'react-router-dom';
 import './style.css';
+import Image from './image';
 
 class App extends Component {
     constructor(props) {
@@ -39,6 +40,7 @@ class App extends Component {
             return (
                 <div>
                     <Search search={this.searchDatabase} />
+                    <Image/>
                     <div id="movieList" className="col-9">
                         <MovieList {...routerProps} movies={this.state.movies} />
                     </div>
