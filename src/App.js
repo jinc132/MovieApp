@@ -5,6 +5,8 @@ import { ButtonDropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reac
 import { Route, Switch, Redirect, NavLink } from 'react-router-dom';
 import './style.css';
 import Image from './image';
+import Carousel from './carousel'
+
 
 class App extends Component {
     constructor(props) {
@@ -91,7 +93,7 @@ class Menu extends Component {
                     </DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem><NavLink exact to='/' activeClassName="activeLink">View Movies</NavLink></DropdownItem>
-                        <DropdownItem><NavLink to='/about' activeClassName="activeLink">About Us</NavLink></DropdownItem>
+                        <DropdownItem><NavLink to='/about.js' activeClassName="activeLink">About Us</NavLink></DropdownItem>
                     </DropdownMenu>
                 </ButtonDropdown>
             </div>
