@@ -4,6 +4,9 @@ import MoviePage from './ViewMovie';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem} from 'reactstrap';
 import { Route, Switch, Redirect, NavLink} from 'react-router-dom';
 import './style.css';
+import Image from './image';
+import Carousel from './carousel'
+
 
 class App extends Component {
     constructor(props) {
