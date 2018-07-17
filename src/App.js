@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import MovieRow from './MovieRow';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import MoviePage from './ViewMovie';
+import { ButtonDropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
+import { Route, Switch, Redirect, NavLink } from 'react-router-dom';
 import './style.css';
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.searchDatabase = this.searchDatabase.bind(this);
+        this.toggleMenu = this.toggleMenu.bind(this);
         this.state = {
             movies: [],
-            menu: false,
-            modal: false,
-            singleMovie: {}
+            dropdownOpen: false
         };
     }
-    searchDatabase(searchMovie){
+
+    searchDatabase(searchMovie) {
         let temp = this;
         let data = MovieRow.movieDatabase(searchMovie);
-        data.catch(function (er){
-          this.setState({movies:[]});
+        data.catch(function (er) {
+            this.setState({ movies: [] });
         }).then((data) => {
-          temp.setState({movies: data.results});
+            temp.setState({ movies: data.results });
         });
     }
+
     componentDidMount() {
         fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=ad1fdbb0dcebf0d1cf8ffbfd5c0eb777&language=en-US&page=1')
             .then((res) => res.json())
@@ -31,23 +33,36 @@ class App extends Component {
                 this.setState({ movies: data.results });
             });
     }
-    toggleMenu() {
-        let toggle = this.state.menu;
-        this.setState({
-            menu: !toggle
-        });
-    }
 
     render() {
+        let renderMovieFunction = (routerProps) => {
+            return (
+                <div>
+                    <Search search={this.searchDatabase} />
+                    <div id="movieList" className="col-9">
+                        <MovieList {...routerProps} movies={this.state.movies} />
+                    </div>
+                </div>
+            );
+        }
         return (
             <div>
                 <header>
-                <Search search={this.searchDatabase}/>
+                    <div>
+                        <Menu toggle={this.state.dropdownOpen} toggleMenu={this.toggleMenu} movies={this.state.movies} />
+                        <div className="col-9">
+                            <Switch>
+                                <Route exact path='/' render={renderMovieFunction} />
+                                <Route path='/movie/:title' component={MoviePage} />
+                                <Redirect to='/' />
+                            </Switch>
+                        </div>
+                        <Search search={this.searchDatabase} />
+                    </div>
                 </header>
                 <main>
                     <div id="movieList" className="col-9">
-                        <MovieList movies= {this.state.movies} adoptCallback={(individualMovie) => this.selectedMovie(individualMovie)} />
-                        <Popup movie={this.state.singleMovie} toggle={() => this.toggle()} modal={this.state.modal} />
+                        <MovieList movies={this.state.movies} />
                     </div>
                     <footer>Data from
                         <a href="https://www.themoviedb.org/documentation/api?language=en">The Movie DB</a>
@@ -56,52 +71,39 @@ class App extends Component {
             </div>
         );
     }
-    toggle() {
-        let mode = this.state.modal;
-        this.setState({
-            modal: !mode
-        });
-    }
 
-    selectedMovie(movie) {
-        let selectedMovie = _.find(this.state.movies, { 'title': movie });
-        this.setState({ singleMovie: selectedMovie, modal: true });
+    toggleMenu() {
+        this.setState({
+            dropdownOpen: !this.state.dropdownOpen
+        });
     }
 }
 
-class Popup extends Component {
+class Menu extends Component {
     render() {
-        let current = this.props.movie;
-        if (current === undefined) return null;
-
         return (
-            <div>
-                <Modal className="modalPopup" isOpen={this.props.modal} fade={false} toggle={this.props.toggle}>
-                    <ModalHeader toggle={this.props.toggle}>{current.title}</ModalHeader>
-                    <ModalBody>
-                        <img src={'http://image.tmdb.org/t/p/w200//' + current.poster_path} alt={current.poster_path} />
-                        <div className="info">
-                            <h3>Release Date</h3>
-                            <p>{current.release_date}</p>
-                            <h3>Vote Average</h3>
-                            <p>{current.vote_average}</p>
-                        </div>
-                        <h3>Overview</h3>
-                        <p>{current.overview}</p>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={() => this.props.toggle()}>Close</Button>
-                    </ModalFooter>
-                </Modal>
-            </div >
+            <div className="menu">
+                <ButtonDropdown direction="down" isOpen={this.props.toggle} toggle={this.props.toggleMenu}>
+                    <DropdownToggle caret size="lg">
+                        <i className="fa fa-bars" aria-label="menu" />
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem><NavLink exact to='/' activeClassName="activeLink">View Movies</NavLink></DropdownItem>
+                        <DropdownItem><NavLink to='/about' activeClassName="activeLink">About Us</NavLink></DropdownItem>
+                    </DropdownMenu>
+                </ButtonDropdown>
+            </div>
         );
     }
 }
+
 class MovieList extends Component {
     render() {
-        let movieArray = this.props.movies.map((movieObj) => {
-            return <MovieCard key={movieObj.title} movieCard={movieObj} adoptCallback={this.props.adoptCallback} />;
+        let movies = this.props.movies;
+        let movieArray = movies.map((movieObj) => {
+            return <MovieCard key={movieObj.title} movieCard={movieObj} />;
         });
+
         return (
             <div>
                 <div className="movie-deck">
@@ -113,11 +115,24 @@ class MovieList extends Component {
 }
 
 class MovieCard extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { shouldRedirect: false };
+    }
+
+    handleClick() {
+        this.setState({ shouldRedirect: true });
+    }
+
     render() {
         let movieCard = this.props.movieCard;
+
+        if (this.state.shouldRedirect) {
+            return <Redirect push to={'/movie/' + movieCard.title} />;
+        }
         return (
-            <div className="card">
-                <img className="card-img-top" src={'http://image.tmdb.org/t/p/w200//' + movieCard.poster_path} alt={movieCard.title} onClick={(e) => this.props.adoptCallback(movieCard.title)} />
+            <div className="card" onClick={() => this.handleClick()}>
+                <img className="card-img-top" src={'http://image.tmdb.org/t/p/w200//' + movieCard.poster_path} alt={movieCard.title} />
                 <div className="card-body">
                     <h3 className="card-title">{movieCard.title}</h3>
                     <p className="card-date">{movieCard.release_date}</p>
@@ -127,29 +142,29 @@ class MovieCard extends Component {
     }
 }
 
-export class Search extends Component{
-    constructor(props){
-      super(props);
-      this.state = {value: ''};
-      this.changeSearch = this.changeSearch.bind(this);
-      this.clickButton = this.clickButton.bind(this);
+export class Search extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { value: '' };
+        this.changeSearch = this.changeSearch.bind(this);
+        this.clickButton = this.clickButton.bind(this);
     }
-    changeSearch(e){
-      this.setState({value: e.target.value});
-      console.log(e.target.value)
+    changeSearch(e) {
+        this.setState({ value: e.target.value });
+        console.log(e.target.value)
     }
-    clickButton(){
-      this.props.search(this.state.value);
-      console.log("button")
+    clickButton() {
+        this.props.search(this.state.value);
+        console.log("button")
     }
-    render(){
-      return(
-        <div className = "searchMovie">
-          <input type="text" className="search" name="q" placeholder="Search Movie" onChange = {this.changeSearch}/>
-          <button type = "button" className = "button" onClick = {this.clickButton}><i className="fa fa-search" onClick = {this.clickButton}></i></button>
-        </div>
-      )
+    render() {
+        return (
+            <div className="searchMovie">
+                <input type="text" className="search" name="q" placeholder="Search Movie" onChange={this.changeSearch} />
+                <button type="button" className="button" onClick={this.clickButton}><i className="fa fa-search" onClick={this.clickButton}></i></button>
+            </div>
+        )
     }
-  }
+}
 
 export default App;
