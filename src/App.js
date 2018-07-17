@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import MovieRow from './MovieRow';
 import MoviePage from './ViewMovie';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem} from 'reactstrap';
-import { Route, Switch, Redirect, NavLink} from 'react-router-dom';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reactstrap';
+import { Route, Switch, Redirect, NavLink } from 'react-router-dom';
 import './style.css';
+import SignUp from './SignUp';
+import firebase from 'firebase/app'
 import Image from './image';
 import Carousel from './carousel'
 
@@ -15,7 +17,8 @@ class App extends Component {
         this.toggleMenu = this.toggleMenu.bind(this);
         this.state = {
             movies: [],
-            isOpen: false
+            isOpen: false,
+            loading: true,
         };
     }
 
@@ -35,24 +38,98 @@ class App extends Component {
             .then((data) => {
                 this.setState({ movies: data.results });
             });
+        this.authUnRegFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
+            if (firebaseUser) {
+                this.setState({ user: firebaseUser, loading: false });
+            } else {
+                this.setState({ user: null, loading: false });
+            }
+        });
+    }
+    componentWillUnmount() {
+        this.authUnRegFunc();
+    }
+
+
+    handleSignUp(email, password, handle) {
+        this.setState({ errorMessage: null });
+
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((firebaseUser) => {
+                let user = firebase.auth().currentUser;
+                let promise = user.updateProfile({
+                    displayName: handle,
+                })
+                return promise;
+            })
+            .then(() => console.log("done"))
+            .catch((error) => {
+                this.setState({ errorMessage: error.message });
+            })
+    }
+
+    handleSignIn(email, password) {
+        this.setState({ errorMessage: null });
+
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .catch((err) => {
+                console.log(err);
+                this.setState({ errorMessage: err.message });
+            })
+    }
+
+    handleSignOut() {
+        this.setState({ errorMessage: null });
+
+        firebase.auth().signOut()
+            .catch((err) => {
+                console.log(err);
+                this.setState({ errorMessage: err.message });
+            })
     }
 
     render() {
         let renderMovieFunction = (routerProps) => {
             return (
-                <div>
-                    <main>
-                        <Search search={this.searchDatabase} />
-                        <div id="movieList" className="col-9">
-                            <MovieList {...routerProps} movies={this.state.movies} />
-                        </div>
-                    </main>
-                </div>
+                <main>
+                    <Search search={this.searchDatabase} />
+                    <Carousel />
+                    <div id="movieList" className="col-9">
+                        <MovieList {...routerProps} movies={this.state.movies} />
+                    </div>
+                </main>
             );
         }
-        return (
-            <div>
-                <header>
+        let subject = null;
+        if (this.state.loading) {
+            return (
+                <div className="text-center">
+                    <i className="fa fa-spinner fa-spin fa-3x" aria-label="Connecting..."></i>
+                </div>
+            )
+        }
+        if (!this.state.user) {
+            subject = (
+                <div className="container">
+                    <h1>We are <span>Fun Movies</span></h1>
+                    <p>Welcome! Log in to your account or register today to leave a review:</p>
+                    <SignUp
+                        signUpCall={(email, pass, handle) => this.handleSignUp(email, pass, handle)}
+                        signInCall={(email, pass) => this.handleSignIn(email, pass)}
+                    />
+                </div>
+            );
+        } else {
+            subject = (
+                <div>
+                    <div>
+                        {this.state.user &&
+                            <button className="btn btn-warning"
+                                onClick={() => this.handleSignOut()}>
+                                Log Out {this.state.user.displayName}
+                            </button>
+                        }
+                    </div>
                     <div>
                         <div>
                             <Navbar color="light" light expand="md">
@@ -64,6 +141,9 @@ class App extends Component {
                                             <NavLink exact to="/" activeClassName="activeLink" className="nav-link">View Movies</NavLink>
                                         </NavItem>
                                         <NavItem>
+                                            <NavLink to="/login" activeClassName="activeLink" className="nav-link">Login</NavLink>
+                                        </NavItem>
+                                        <NavItem>
                                             <NavLink to="/about" activeClassName="activeLink" className="nav-link">About Us</NavLink>
                                         </NavItem>
                                     </Nav>
@@ -73,14 +153,23 @@ class App extends Component {
                         <div className="col-9">
                             <Switch>
                                 <Route exact path='/' render={renderMovieFunction} />
-                                {/* <Route path='/login' component={} /> */}
+                                <Route path='/login' component={subject} />
                                 <Route path='/movie/:title' component={MoviePage} />
                                 <Redirect to='/' />
                             </Switch>
                         </div>
                     </div>
+                </div>
+            );
+        }
+        return (
+            <div>
+                <header>
                 </header>
                 <main>
+                    {this.state.errorMessage &&
+                        <p className="alert alert-danger">{this.state.errorMessage} </p>}
+                    {subject}
                     <footer>Data from
                         <a href="https://www.themoviedb.org/documentation/api?language=en">The Movie DB</a>
                     </footer>
