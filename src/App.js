@@ -94,7 +94,7 @@ class App extends Component {
                 <main>
                     <Search search={this.searchDatabase} />
                     <Carousel />
-                    <div id="movieList" className="col-9">
+                    <div id="movieList">
                         <MovieList {...routerProps} movies={this.state.movies} />
                     </div>
                 </main>
@@ -150,7 +150,7 @@ class App extends Component {
                                 </Collapse>
                             </Navbar>
                         </div>
-                        <div className="col-9">
+                        <div className="container">
                             <Switch>
                                 <Route exact path='/' render={renderMovieFunction} />
                                 <Route path='/login' component={subject} />

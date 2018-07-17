@@ -1,21 +1,9 @@
-main {
-    background-color: rgba(128, 128, 128, 0.549);
-}
-
-.titleBar{
-    background-color: black;
-    display: block;
-    color: White;
-    padding-left: 10px;
-}
-
-.titleBar h2{
-    margin-left: 10px;
+body {
+    background-color: grey;
 }
 
 footer{
-    background-color: gray;
-    text-align:center;
+    text-align:left;
 }
 
 .mySlides{
@@ -23,10 +11,15 @@ footer{
     height: 500px;
 }
 
+.slider {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
+    background-color: rgba(255, 255, 255, 0.864);
+}
+
 .searchMovie {
     text-align: center;
     font-size: 32px;
-    padding: .3em;
+    padding: 1rem;
 }
 
 .movie-deck .card {
@@ -36,7 +29,7 @@ footer{
     margin: .5rem;
     align-items: center;
     text-align: center;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.864);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
 }
 
@@ -48,6 +41,7 @@ footer{
     display: flex;
     position: relative;
     flex-wrap: wrap;
+    padding-top: 2rem;
     justify-content: center;
 }
 
