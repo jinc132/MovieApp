@@ -38,10 +38,14 @@ class App extends Component {
         let renderMovieFunction = (routerProps) => {
             return (
                 <div>
-                    <Search search={this.searchDatabase} />
-                    <div id="movieList" className="col-9">
-                        <MovieList {...routerProps} movies={this.state.movies} />
-                    </div>
+                    <header>
+                        <Search search={this.searchDatabase} />
+                    </header>
+                    <main>
+                        <div id="movieList" className="col-9">
+                            <MovieList {...routerProps} movies={this.state.movies} />
+                        </div>
+                    </main>
                 </div>
             );
         }
@@ -57,13 +61,9 @@ class App extends Component {
                                 <Redirect to='/' />
                             </Switch>
                         </div>
-                        <Search search={this.searchDatabase} />
                     </div>
                 </header>
                 <main>
-                    <div id="movieList" className="col-9">
-                        <MovieList movies={this.state.movies} />
-                    </div>
                     <footer>Data from
                         <a href="https://www.themoviedb.org/documentation/api?language=en">The Movie DB</a>
                     </footer>
