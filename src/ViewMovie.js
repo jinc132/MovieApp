@@ -9,13 +9,9 @@ class MoviePage extends Component {
     }
 
     componentDidMount() {
-        fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=ad1fdbb0dcebf0d1cf8ffbfd5c0eb777&language=en-US&page=1')
-            .then((res) => res.json())
-            .then((data) => {
-                let movieName = this.props.match.params.title;
-                let movObj = _.find(data.results, { title: movieName });
-                this.setState({ movies: movObj });
-            });
+        let movieName = this.props.match.params.title;
+        //let movObj = _.find(data.results, { title: movieName });
+        //this.setState({ movies: movObj });
     }
 
     render() {

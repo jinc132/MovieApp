@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import MovieRow from './MovieRow';
 import MoviePage from './ViewMovie';
-import { ButtonDropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
-import { Route, Switch, Redirect, NavLink } from 'react-router-dom';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem} from 'reactstrap';
+import { Route, Switch, Redirect, NavLink} from 'react-router-dom';
 import './style.css';
 
 class App extends Component {
@@ -12,7 +12,7 @@ class App extends Component {
         this.toggleMenu = this.toggleMenu.bind(this);
         this.state = {
             movies: [],
-            dropdownOpen: false
+            isOpen: false
         };
     }
 
@@ -38,10 +38,8 @@ class App extends Component {
         let renderMovieFunction = (routerProps) => {
             return (
                 <div>
-                    <header>
-                        <Search search={this.searchDatabase} />
-                    </header>
                     <main>
+                        <Search search={this.searchDatabase} />
                         <div id="movieList" className="col-9">
                             <MovieList {...routerProps} movies={this.state.movies} />
                         </div>
@@ -53,10 +51,26 @@ class App extends Component {
             <div>
                 <header>
                     <div>
-                        <Menu toggle={this.state.dropdownOpen} toggleMenu={this.toggleMenu} movies={this.state.movies} />
+                        <div>
+                            <Navbar color="light" light expand="md">
+                                <NavbarBrand href="/"><i className="fa fa-film"> MovRate</i></NavbarBrand>
+                                <NavbarToggler onClick={this.toggleMenu} />
+                                <Collapse isOpen={this.state.isOpen} navbar>
+                                    <Nav className="ml-auto" navbar>
+                                        <NavItem>
+                                            <NavLink exact to="/" activeClassName="activeLink" className="nav-link">View Movies</NavLink>
+                                        </NavItem>
+                                        <NavItem>
+                                            <NavLink to="/about" activeClassName="activeLink" className="nav-link">About Us</NavLink>
+                                        </NavItem>
+                                    </Nav>
+                                </Collapse>
+                            </Navbar>
+                        </div>
                         <div className="col-9">
                             <Switch>
                                 <Route exact path='/' render={renderMovieFunction} />
+                                {/* <Route path='/login' component={} /> */}
                                 <Route path='/movie/:title' component={MoviePage} />
                                 <Redirect to='/' />
                             </Switch>
@@ -74,26 +88,8 @@ class App extends Component {
 
     toggleMenu() {
         this.setState({
-            dropdownOpen: !this.state.dropdownOpen
+            isOpen: !this.state.isOpen
         });
-    }
-}
-
-class Menu extends Component {
-    render() {
-        return (
-            <div className="menu">
-                <ButtonDropdown direction="down" isOpen={this.props.toggle} toggle={this.props.toggleMenu}>
-                    <DropdownToggle caret size="lg">
-                        <i className="fa fa-bars" aria-label="menu" />
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem><NavLink exact to='/' activeClassName="activeLink">View Movies</NavLink></DropdownItem>
-                        <DropdownItem><NavLink to='/about' activeClassName="activeLink">About Us</NavLink></DropdownItem>
-                    </DropdownMenu>
-                </ButtonDropdown>
-            </div>
-        );
     }
 }
 
