@@ -216,7 +216,7 @@ class App extends Component {
                     <footer>Data from
                         <a href="https://www.themoviedb.org/documentation/api?language=en">The Movie DB</a>
                     </footer>
-                    <AboutCarousel/>
+                   
                 </main>
             </div>
         );
