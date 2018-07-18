@@ -1,4 +1,4 @@
-import {Carousel,  CarouselItem,  CarouselControl,  CarouselIndicators, CarouselCaption } from 'reactstrap';
+import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap';
 import React, { Component } from 'react';
 import './style.css';
 let items = [];
@@ -51,10 +51,10 @@ class MainCarousel extends Component {
     const { activeIndex } = this.state;
     let slides = items.map((elem) => {
       return (
-        <CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={elem.title}>
-          <img src={'http://image.tmdb.org/t/p/w500//' + elem.backdrop_path} alt={elem.title + 'image'} />
-          <CarouselCaption captionText={elem.release_date} captionHeader={elem.title} />
-        </CarouselItem>
+          <CarouselItem key={elem.id} onExiting={this.onExiting} onExited={this.onExited} >
+            <img src={'http://image.tmdb.org/t/p/w300//' + elem.backdrop_path} alt={elem.title + 'image'} />
+            <CarouselCaption captionHeader='Top Movies:' captionText= {elem.title}/>
+          </CarouselItem>
       )
     });
 

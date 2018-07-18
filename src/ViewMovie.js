@@ -16,6 +16,7 @@ class MoviePage extends Component {
     componentDidMount() {
         let movieName = this.props.match.params.name;
         let movArray = this.props.movie;
+        console.log(movArray);
         let movObj = _.find(movArray, { name: movieName });
         this.setState({ movie: movObj });
     }
