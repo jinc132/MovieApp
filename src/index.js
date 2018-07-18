@@ -18,11 +18,10 @@ var config = {
     authDomain: "movieproject-d3fdc.firebaseapp.com",
     databaseURL: "https://movieproject-d3fdc.firebaseio.com",
     projectId: "movieproject-d3fdc",
-    storageBucket: "",
+    storageBucket: "movieproject-d3fdc.appspot.com",
     messagingSenderId: "440752183141"
 };
-
-firebase.initializeApp(config); 
+firebase.initializeApp(config);
 // let myIndex = 0;
 // carousel();
 

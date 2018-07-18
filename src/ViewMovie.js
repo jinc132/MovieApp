@@ -2,11 +2,15 @@ import React, { Component } from 'react'; //import React Component
 import { Button } from 'reactstrap';
 import _ from 'lodash';
 import './style.css';
+import ReviewBox from './ReviewBox';
 
 class MoviePage extends Component {
     constructor(props) {
         super(props);
-        this.state = { movie: undefined };
+        this.state = {
+            movie: undefined,
+            toggle: false
+        };
     }
 
     componentDidMount() {
@@ -33,7 +37,7 @@ class MoviePage extends Component {
                     <h3>Overview</h3>
                     <p>{movie.overview}</p>
                     <div className="container">
-                        <Button size="large" color="primary">Put in Basket</Button>
+                        <Button size="large" color="primary" onClick={() => this.props.handleClick(movie)}>Put in Basket</Button>
                         <Button size="large" color="second">Rate It!</Button>
                     </div>
                 </main>
