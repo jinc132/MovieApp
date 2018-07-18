@@ -12,16 +12,6 @@ export default class MultipleItems extends Component {
       slidesToShow: 3,
       slidesToScroll: 3
     };
-<<<<<<< Updated upstream
-=======
-    let movieBackDrops = topFive.map((elem) => {
-      return (
-        <div key= {elem.id}>
-          <img src={'http://image.tmdb.org/t/p/w500//' + elem.backdrop_path} alt={elem.title + 'image'} />
-        </div>
-      )
-    });
->>>>>>> Stashed changes
     return (
       <div>
         <h2> Multiple items </h2>

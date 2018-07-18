@@ -100,11 +100,7 @@ class App extends Component {
             return (
                 <main>
                     <Search search={this.searchDatabase} />
-<<<<<<< Updated upstream
                     <MainCarousel {...routerProps} movies={this.state.movies}/>
-=======
-                    <Carousel {...routerProps} movies={this.state.movies} />
->>>>>>> Stashed changes
                     <div id="movieList">
                         <MovieList {...routerProps} movies={this.state.movies} />
                     </div>
