@@ -4,7 +4,7 @@ import firebase from 'firebase/app';
 export default class ReviewBox extends Component {
     constructor(props){
       super(props);
-      this.state = {post:''};
+      this.state = {post:'', rating: 1};
     }
 
     updatePost(event) {

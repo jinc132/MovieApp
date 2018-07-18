@@ -88,6 +88,12 @@ class App extends Component {
             })
     }
 
+    handleClick(movie) {
+        let newReview = movie;
+        let tasksRef = firebase.database().ref('AddMovies');
+        tasksRef.push(newReview);
+    }
+
     render() {
         this.encode(this.state.movies);
         let renderMovieFunction = (routerProps) => {
@@ -104,7 +110,7 @@ class App extends Component {
 
         let renderMoviePage = (routerProps) => {
             return (
-                <MoviePage {...routerProps} movie={this.state.movies} />
+                <MoviePage {...routerProps} movie={this.state.movies} handleClick={this.handleClick} />
             );
         }
 
@@ -194,7 +200,7 @@ class App extends Component {
     encode(movie) {
         movie.map((elem) => {
             let name = elem.title.replace(/\W/g, '_');
-            elem.name = name;
+            return (elem.name = name);
         });
     }
     toggleMenu() {
