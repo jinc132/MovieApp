@@ -63,3 +63,9 @@ footer{
 .moviePage .info{
     text-align: center;
 }
+
+.imageContainer img {
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}

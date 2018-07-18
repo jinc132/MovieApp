@@ -94,16 +94,15 @@ class App extends Component {
             return (
                 <main>
                     <Search search={this.searchDatabase} />
-                    <Carousel />
+                    <Carousel {...routerProps} movies={this.state.movies}/>
                     <div id="movieList">
-                        <MovieList {...routerProps} movie={this.state.movies} />
+                        <MovieList {...routerProps} movies={this.state.movies} />
                     </div>
                 </main>
             );
         }
 
         let renderMoviePage = (routerProps) => {
-            console.log(this.state.movies);
             return (
                 <MoviePage {...routerProps} movie={this.state.movies} />
             );
@@ -193,7 +192,6 @@ class App extends Component {
             elem.name = name;
         });
     }
-
     toggleMenu() {
         this.setState({
             isOpen: !this.state.isOpen
