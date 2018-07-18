@@ -23,6 +23,22 @@ class MoviePage extends Component {
 
     render() {
         let movie = this.state.movie;
+        let buttons = undefined;
+        if (!this.props.userStatus) {
+            buttons = (
+                <div>
+                    <Button size="large" color="success" onClick={() => this.props.handleClick(movie)}>Put in Basket</Button>
+                    <Button size="large" color="success" onClick={() => this.props.history.push('/login')}>Rate It!</Button>
+                </div>
+            )
+        } else {
+            buttons = (
+                <div>
+                    <Button size="large" color="success" onClick={() => this.props.handleClick(movie)}>Put in Basket</Button>
+                    <Button size="large" color="success">Rate It!</Button>
+                </div>
+            )
+        }
         if (!movie) return <h2> No movie specified </h2>
         return (
             <div className="moviePage">
@@ -38,8 +54,7 @@ class MoviePage extends Component {
                     <h3>Overview</h3>
                     <p>{movie.overview}</p>
                     <div className="buttons">
-                        <Button size="large" color="success" onClick={() => this.props.handleClick(movie)}>Put in Basket</Button>
-                        <Button size="large" color="success">Rate It!</Button>
+                        {buttons}
                     </div>
                 </main>
             </div>

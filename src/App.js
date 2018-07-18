@@ -84,7 +84,7 @@ class App extends Component {
         firebase.auth().signOut()
             .catch((err) => {
                 console.log(err);
-                this.setState({ errorMessage: err.message });
+                this.setState({ errorMessage: err.message, guest: true });
             })
     }
 
@@ -110,7 +110,7 @@ class App extends Component {
 
         let renderMoviePage = (routerProps) => {
             return (
-                <MoviePage {...routerProps} movie={this.state.movies} handleClick={this.handleClick} />
+                <MoviePage {...routerProps} movie={this.state.movies} handleClick={this.handleClick} userStatus={this.state.user} />
             );
         }
 
@@ -122,21 +122,21 @@ class App extends Component {
                 </div>
             )
         }
-        if (!this.state.user) {
-            subject = (
+
+        let renderSignUp = (routerProps) => {
+            return (
                 <div className="container">
-                    <h1>We are <span>Fun Movies</span></h1>
-                    <p>Welcome! Log in to your account or register today to leave a review:</p>
-                    <SignUp
+                    <SignUp {...routerProps}
                         signUpCall={(email, pass, handle) => this.handleSignUp(email, pass, handle)}
                         signInCall={(email, pass) => this.handleSignIn(email, pass)}
                     />
                 </div>
             );
-        } else {
+        }
+
+        if (!this.state.user) {
             subject = (
                 <div>
-
                     <div>
                         <div>
                             <Navbar color="light" light expand="md">
@@ -151,9 +151,7 @@ class App extends Component {
                                             <NavLink to="/about" activeClassName="activeLink" className="nav-link">About Us</NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            
-                                            <button className="btn btn-warning" onClick={() => this.handleSignOut()}> Log Out {this.state.user.displayName}
-                                             </button>
+                                            <NavLink to="/login" activeClassName="activeLink" className="nav-link">Login</NavLink>
                                         </NavItem>
                                     </Nav>
                                 </Collapse>
@@ -162,7 +160,42 @@ class App extends Component {
                         <div className="container">
                             <Switch>
                                 <Route exact path='/' render={renderMovieFunction} />
-                                <Route path='/login' component={subject} />
+                                <Route path='/login' render={renderSignUp} />
+                                <Route path='/movie/:name' render={renderMoviePage} />
+                                <Redirect to='/' />
+                            </Switch>
+                        </div>
+                    </div>
+                </div>
+            );
+        } else {
+            subject = (
+                <div>
+                    <div>
+                        <div>
+                            <Navbar color="light" light expand="md">
+                                <NavbarBrand href="/"><i className="fa fa-film"> MovRate</i></NavbarBrand>
+                                <NavbarToggler onClick={this.toggleMenu} />
+                                <Collapse isOpen={this.state.isOpen} navbar>
+                                    <Nav className="ml-auto" navbar>
+                                        <NavItem>
+                                            <NavLink exact to="/" activeClassName="activeLink" className="nav-link">View Movies</NavLink>
+                                        </NavItem>
+                                        <NavItem>
+                                            <NavLink to="/about" activeClassName="activeLink" className="nav-link">About Us</NavLink>
+                                        </NavItem>
+                                        <NavItem>
+                                            <button className="btn btn-warning" onClick={() => this.handleSignOut()}> Log Out {this.state.user.displayName}
+                                            </button>
+                                        </NavItem>
+                                    </Nav>
+                                </Collapse>
+                            </Navbar>
+                        </div>
+                        <div className="container">
+                            <Switch>
+                                <Route exact path='/' render={renderMovieFunction} />
+                                <Route path='/login' render={renderSignUp} />
                                 <Route path='/movie/:name' render={renderMoviePage} />
                                 <Redirect to='/' />
                             </Switch>
