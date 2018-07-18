@@ -70,7 +70,8 @@ footer{
 }
 
 .carousel-caption {
-    color: rgb(192, 202, 228);
+    color: rgb(255, 255, 255);
+    text-shadow: 1.5px 1.5px rgba(214, 204, 204, 0.85);
     bottom: unset;
     top: 20px;
     font-size: 32px;
