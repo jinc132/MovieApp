@@ -90,10 +90,10 @@ class App extends Component {
             })
     }
 
-    handleClick(movie) {
-        let newReview = movie;
-        let tasksRef = firebase.database().ref('AddMovies');
-        tasksRef.push(newReview);
+    handleClick(movie, uid) {
+        let newMovie = movie;
+        let basketRef = firebase.database().ref('baskets').child(uid);
+        basketRef.push(newMovie);
     }
 
     render() {
@@ -112,7 +112,7 @@ class App extends Component {
 
         let renderMoviePage = (routerProps) => {
             return (
-                <MoviePage {...routerProps} movie={this.state.movies} handleClick= {this.handleClick} reviewBox = {this.state.user}/>
+                <MoviePage {...routerProps} movie={this.state.movies} handleClick={this.handleClick} userStatus={this.state.user} reviewBox = {this.state.user}/>
             );
         }
 
@@ -291,12 +291,10 @@ export class Search extends Component {
 
     changeSearch(e) {
         this.setState({ value: e.target.value });
-        console.log(e.target.value)
     }
 
     clickButton() {
         this.props.search(this.state.value);
-        console.log("button")
     }
 
     render() {

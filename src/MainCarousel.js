@@ -53,7 +53,7 @@ class MainCarousel extends Component {
       return (
           <CarouselItem key={elem.id} onExiting={this.onExiting} onExited={this.onExited} >
             <img src={'http://image.tmdb.org/t/p/w300//' + elem.backdrop_path} alt={elem.title + 'image'} />
-            <CarouselCaption captionHeader='Top Movies:' captionText= {elem.title}/>
+            <CarouselCaption captionHeader='Recommended Movies:' captionText= {elem.title}/>
           </CarouselItem>
       )
     });
