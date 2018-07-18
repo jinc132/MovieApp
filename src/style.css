@@ -90,3 +90,19 @@ footer{
     text-align: center;
     
 }
+
+.handle {
+    font: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: rgb(201, 78, 109);
+}
+
+.rating {
+    float: right;
+    color: rgb(197, 195, 56);
+}
+
+.likes {
+    color: rgb(117, 202, 78);
+}

@@ -20,9 +20,8 @@ export default class ReviewBox extends Component {
     }
 
     postReview(event){
-        event.preventDefault(); //don't submit
+        event.preventDefault(); 
         
-        /* TODO: add a new Chirp to the database */
         let newReview = {
           text: this.state.post,
           userId: this.props.currentUser.uid,
@@ -35,11 +34,11 @@ export default class ReviewBox extends Component {
         tasksRef.push(newReview);
         
     
-        this.setState({post:''}); //empty out post for next time
+        this.setState({post:''}); 
     }
 
     render() {
-        let user = this.props.currentUser; //the current user (convenience)
+        let user = this.props.currentUser; 
         const { rating } = this.state;
     
         return (
@@ -61,15 +60,13 @@ export default class ReviewBox extends Component {
                     />
                   </div>  
     
-                  {/* Only show this if the post length is > 140 */}
-                  {this.state.post.length > 150 &&
-                    <small className="form-text">150 character limit!</small>
+                  {this.state.post.length > 130 &&
+                    <small className="form-text">130 character limit!</small>
                   }
                   
                   <div className="text-right">
-                    {/* Disable if invalid post length */}
                     <button className="btn btn-primary" 
-                      disabled={this.state.post.length === 0 || this.state.post.length > 140}
+                      disabled={this.state.post.length === 0 || this.state.post.length > 130}
                       onClick={(e) => this.postReview(e)} 
                       >
                       <i className="fa fa-pencil-square-o" aria-hidden="true"></i> Share

@@ -25,12 +25,12 @@ export default class ReviewList extends Component {
 
     let reviewArray = Object.keys(this.state.reviews).map((key) =>
     {
-      let chirpObj = this.state.reviews[key];
-      chirpObj.id = key;
-      return chirpObj;
+      let reviewObj = this.state.reviews[key];
+      reviewObj.id = key;
+      return reviewObj;
     });
     let reviewItems = reviewArray.map((key) => {
-      return <ReviewItem key= {key.id} review= {key} currentUser= {this.props.currentUser} />
+      return <ReviewItem key= {key.id} review= {key} currentUser= {this.props.currentUser} currentMovie={this.props.currentMovie}/>
     });
     return (
       <div className="container">
@@ -41,7 +41,7 @@ export default class ReviewList extends Component {
 
 class ReviewItem extends Component {
   likeReview() {
-    let likes  = firebase.database().ref('reviews/'+ this.props.review.id +'/likes');
+    let likes  = firebase.database().ref('reviews/').child(this.props.currentMovie.title).child(this.props.review.id + '/likes');
     let update = this.props.review.likes;
     if(update === undefined){
       update = {};
@@ -70,10 +70,7 @@ class ReviewItem extends Component {
         userLikes = true; 
     }
 
-    let rate = '';
-    if(review.rating !== undefined){
-      rate = review.rating + "stars"
-    }
+    
 
     return (
       <div className="row py-4 bg-white border">
@@ -82,13 +79,13 @@ class ReviewItem extends Component {
 
           <span className="handle">{review.userName} {/*space*/}</span>
 
-          <div className="chirp">{review.text}</div>
+          <div className="review">{review.text}</div>
 
-          <div className="rating">{rate}</div>
+          <div className="rating">{review.rating}<i className="fa fa-star"></i></div>
 
           {/* A section for showing chirp likes */}
           <div className="likes">          
-            <i className={'fa fa-heart '+(userLikes ? 'user-liked': '')} aria-label="like" onClick={() => this.likeReview()} ></i>            
+            <i className={'fa fa-thumbs-up '+(userLikes ? 'user-liked': '')} aria-label="like" onClick={() => this.likeReview()} ></i>            
             <span>{/*space*/} {likeCount}</span>
           </div>
         </div>
