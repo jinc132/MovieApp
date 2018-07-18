@@ -130,14 +130,14 @@ class App extends Component {
         } else {
             subject = (
                 <div>
-                    <div>
+                    {/* <div>
                         {this.state.user &&
                             <button className="btn btn-warning"
                                 onClick={() => this.handleSignOut()}>
                                 Log Out {this.state.user.displayName}
                             </button>
                         }
-                    </div>
+                    </div> */}
                     
                     <div>
                         <div>
@@ -150,10 +150,14 @@ class App extends Component {
                                             <NavLink exact to="/" activeClassName="activeLink" className="nav-link">View Movies</NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink to="/login" activeClassName="activeLink" className="nav-link">Login</NavLink>
+                                            <NavLink to="/about" activeClassName="activeLink" className="nav-link">About Us</NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink to="/about" activeClassName="activeLink" className="nav-link">About Us</NavLink>
+                                            {/* <NavLink to="/login" activeClassName="activeLink" className="nav-link">Login</NavLink> */}
+                                            <button className="btn btn-warning"
+                                                onClick={() => this.handleSignOut()}>
+                                                Log Out {this.state.user.displayName}
+                                            </button>
                                         </NavItem>
                                     </Nav>
                                 </Collapse>
