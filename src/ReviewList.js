@@ -1,5 +1,4 @@
 import React, { Component } from 'react'; 
-import Time from 'react-time'
 import './style.css'; 
 import firebase from 'firebase/app'
 
@@ -22,17 +21,17 @@ export default class ReviewList extends Component {
   }
 
   render() {
-    if (!this.state.chirps) return null; //if no chirps, don't display
+    if (!this.state.reviews) return null; //if no chirps, don't display
 
-    let reviewArray = Object.keys(this.state.chirps).map((key) =>
+    let reviewArray = Object.keys(this.state.reviews).map((key) =>
     {
-      let chirpObj = this.state.chirps[key];
+      let chirpObj = this.state.reviews[key];
       chirpObj.id = key;
       return chirpObj;
     });
      //REPLACE THIS with an array of actual values!
     let reviewItems = reviewArray.map((key) => {
-      return <ChirpItem key= {key.id} review= {key} currentUser= {this.props.currentUser} />
+      return <ReviewItem key= {key.id} review= {key} currentUser= {this.props.currentUser} />
     });
     return (
       <div className="container">
@@ -42,9 +41,9 @@ export default class ReviewList extends Component {
 }
 
 //A single Chirp
-class ChirpItem extends Component {
+class ReviewItem extends Component {
   likeChirp() {
-    let likes  = firebase.database().ref('chirps/'+ this.props.review.id +'/likes');
+    let likes  = firebase.database().ref('Review/'+ this.props.review.id +'/likes');
     let update = this.props.review.likes;
     if(update === undefined){
       update = {};
@@ -82,8 +81,6 @@ class ChirpItem extends Component {
         <div className="col pl-4 pl-lg-1">
 
           <span className="handle">{review.userName} {/*space*/}</span>
-
-          <span className="time"><Time value={review.time} relative/></span>
 
           <div className="chirp">{review.text}</div>
 

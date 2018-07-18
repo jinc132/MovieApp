@@ -138,6 +138,7 @@ class App extends Component {
                             </button>
                         }
                     </div>
+                    
                     <div>
                         <div>
                             <Navbar color="light" light expand="md">
