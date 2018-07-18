@@ -27,7 +27,7 @@ class MoviePage extends Component {
         return (
             <div className="moviePage">
                 <main>
-                    <div className="info col-3">
+                    <div className="info .col-sm-12 .col-md-6 .col-md-offset-3">
                         <h2>{movie.title}</h2>
                         <img src={'http://image.tmdb.org/t/p/w200//' + movie.poster_path} alt={movie.poster_path} />
                         <h3>Release Date</h3>
@@ -37,9 +37,9 @@ class MoviePage extends Component {
                     </div>
                     <h3>Overview</h3>
                     <p>{movie.overview}</p>
-                    <div className="container">
-                        <Button size="large" color="primary" onClick={() => this.props.handleClick(movie)}>Put in Basket</Button>
-                        <Button size="large" color="second">Rate It!</Button>
+                    <div className="buttons">
+                        <Button size="large" color="success" onClick={() => this.props.handleClick(movie)}>Put in Basket</Button>
+                        <Button size="large" color="success">Rate It!</Button>
                     </div>
                 </main>
             </div>

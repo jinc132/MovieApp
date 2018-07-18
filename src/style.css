@@ -60,8 +60,13 @@ footer{
     text-align: center;
 }
 
-.moviePage .info{
+.moviePage .info {
     text-align: center;
+    padding: 1em;
+}
+
+.moviePage .info img {
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
 }
 
 .carousel-item img{
@@ -79,4 +84,9 @@ footer{
 
 .fa {
     font-size: 25px;
+}
+
+.buttons {
+    text-align: center;
+    
 }
