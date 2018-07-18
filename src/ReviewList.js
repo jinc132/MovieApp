@@ -8,7 +8,7 @@ export default class ReviewList extends Component {
     this.state = {reviews:[]};
   }
   componentDidMount() {
-    this.reviewsRef = firebase.database().ref('reviews');
+    this.reviewsRef = firebase.database().ref('reviews').child(this.props.currentMovie.title);
     this.reviewsRef.on('value', (snapshot) => {
       this.setState({
         reviews: snapshot.val()
@@ -21,7 +21,7 @@ export default class ReviewList extends Component {
   }
 
   render() {
-    if (!this.state.reviews) return null; //if no chirps, don't display
+    if (!this.state.reviews) return null;
 
     let reviewArray = Object.keys(this.state.reviews).map((key) =>
     {
@@ -29,7 +29,6 @@ export default class ReviewList extends Component {
       chirpObj.id = key;
       return chirpObj;
     });
-     //REPLACE THIS with an array of actual values!
     let reviewItems = reviewArray.map((key) => {
       return <ReviewItem key= {key.id} review= {key} currentUser= {this.props.currentUser} />
     });
@@ -40,7 +39,6 @@ export default class ReviewList extends Component {
   }
 }
 
-//A single Chirp
 class ReviewItem extends Component {
   likeReview() {
     let likes  = firebase.database().ref('reviews/'+ this.props.review.id +'/likes');
@@ -62,15 +60,14 @@ class ReviewItem extends Component {
   }
  
   render() {
-    let review = this.props.review; //current chirp (convenience)
+    let review = this.props.review; 
 
-    //counting likes
-    let likeCount = 0; //count likes
-    let userLikes = false; //current user has liked
+    let likeCount = 0; 
+    let userLikes = false; 
     if(review.likes){
       likeCount = Object.keys(review.likes).length;
-      if(review.likes[this.props.currentUser.uid]) //if user id is listed
-        userLikes = true; //user liked!
+      if(review.likes[this.props.currentUser.uid]) 
+        userLikes = true; 
     }
 
     let rate = '';

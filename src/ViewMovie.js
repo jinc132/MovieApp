@@ -59,10 +59,10 @@ class MoviePage extends Component {
                         {buttons}
                     </div>
                     <div>
-                            <ReviewBox currentUser ={this.props.reviewBox}>
+                            <ReviewBox currentUser ={this.props.reviewBox} currentMovie= {movie}>
                                     
                             </ReviewBox>
-                        <ReviewList currentUser ={this.props.reviewBox}></ReviewList>
+                        <ReviewList currentUser ={this.props.reviewBox} currentMovie = {movie}></ReviewList>
                     </div>
                 </main>
             </div>

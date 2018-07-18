@@ -29,10 +29,10 @@ export default class ReviewBox extends Component {
           userName: this.props.currentUser.displayName,
           rating: this.state.rating
         };
+
+        let tasksRef = firebase.database().ref('reviews').child(this.props.currentMovie.title);
     
-        let tasksRef = firebase.database().ref('reviews');
-    
-        tasksRef.push(newReview)
+        tasksRef.push(newReview);
         
     
         this.setState({post:''}); //empty out post for next time
