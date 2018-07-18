@@ -38,7 +38,6 @@ export default class ReviewBox extends Component {
     }
 
     render() {
-        let user = this.props.currentUser; 
         const { rating } = this.state;
     
         return (
