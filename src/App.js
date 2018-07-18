@@ -6,7 +6,7 @@ import { Route, Switch, Redirect, NavLink } from 'react-router-dom';
 import './style.css';
 import SignUp from './SignUp';
 import firebase from 'firebase/app';
-import Carousel from './carousel';
+import MainCarousel from './MainCarousel';
 
 
 class App extends Component {
@@ -94,7 +94,7 @@ class App extends Component {
             return (
                 <main>
                     <Search search={this.searchDatabase} />
-                    <Carousel {...routerProps} movies={this.state.movies}/>
+                    <MainCarousel {...routerProps} movies={this.state.movies}/>
                     <div id="movieList">
                         <MovieList {...routerProps} movies={this.state.movies} />
                     </div>

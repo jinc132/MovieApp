@@ -1,43 +1,43 @@
-import Slider from "react-slick";
-import React, { Component } from 'react';
 import './style.css';
+import React, { Component } from "react";
+import Slider from "../src/slider";
 
-class Carousel extends Component {
-  findTopFive() {
-    let movie = this.props.movies;
-    let topMovie = movie.filter(function (elem) {
-      return elem.vote_average > 7;
-    });
-    return topMovie;
-  }
-
+export default class MultipleItems extends Component {
   render() {
-    let topFive = this.findTopFive();
-    let settings = {
+    const settings = {
       dots: true,
       infinite: true,
       speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
+      fade: true,
+      slidesToShow: 3,
+      slidesToScroll: 3
     };
-    let movieBackDrops = topFive.map((elem) => {
-      return (
-        <div>
-          <img key= {elem.id} src={'http://image.tmdb.org/t/p/w500//' + elem.backdrop_path} alt={elem.title + 'image'} />
-        </div>
-      )
-    });
     return (
-      <div className="slider">
-        <h2>Top Movies</h2>
+      <div>
+        <h2> Multiple items </h2>
         <Slider {...settings}>
-          {movieBackDrops}
+          <div>
+            <h3>1</h3>
+          </div>
+          <div>
+            <h3>2</h3>
+          </div>
+          <div>
+            <h3>3</h3>
+          </div>
+          <div>
+            <h3>4</h3>
+          </div>
+          <div>
+            <h3>5</h3>
+          </div>
+          <div>
+            <h3>6</h3>
+          </div>
         </Slider>
       </div>
     );
   }
-
 }
-
 
 export default Carousel
