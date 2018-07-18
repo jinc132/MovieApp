@@ -9,6 +9,7 @@ import firebase from 'firebase/app';
 import Carousel from './carousel';
 
 
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -94,7 +95,7 @@ class App extends Component {
             return (
                 <main>
                     <Search search={this.searchDatabase} />
-                    <Carousel {...routerProps} movies={this.state.movies}/>
+                    <Carousel {...routerProps} movies={this.state.movies} />
                     <div id="movieList">
                         <MovieList {...routerProps} movies={this.state.movies} />
                     </div>
@@ -104,7 +105,7 @@ class App extends Component {
 
         let renderMoviePage = (routerProps) => {
             return (
-                <MoviePage {...routerProps} movie={this.state.movies} />
+                <MoviePage {...routerProps} movie={this.state.movies} reviewBox = {this.state.user}/>
             );
         }
 
@@ -138,7 +139,6 @@ class App extends Component {
                             </button>
                         }
                     </div>
-                    
                     <div>
                         <div>
                             <Navbar color="light" light expand="md">
@@ -164,6 +164,7 @@ class App extends Component {
                                 <Route exact path='/' render={renderMovieFunction} />
                                 <Route path='/login' component={subject} />
                                 <Route path='/movie/:name' render={renderMoviePage} />
+                                <Route path='/review/:name' render={renderMoviePage} />
                                 <Redirect to='/' />
                             </Switch>
                         </div>

@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
+import StarRatingComponent from 'react-star-rating-component';
 
 export default class ReviewBox extends Component {
     constructor(props){
       super(props);
-      this.state = {post:''};
+      this.state = {
+        post:'',
+        rating: 1
+      };
+    }
+
+    onStarClick(nextValue) {
+      this.setState({rating: nextValue});
     }
 
     updatePost(event) {
@@ -19,6 +27,7 @@ export default class ReviewBox extends Component {
           text: this.state.post,
           userId: this.props.currentUser.uid,
           userName: this.props.currentUser.displayName,
+          rating: this.state.rating
         };
     
         let tasksRef = firebase.database().ref('reviews');
@@ -31,6 +40,7 @@ export default class ReviewBox extends Component {
 
     render() {
         let user = this.props.currentUser; //the current user (convenience)
+        const { rating } = this.state;
     
         return (
           <div className="container">
@@ -42,14 +52,18 @@ export default class ReviewBox extends Component {
                     value={this.state.post} 
                     onChange={(e) => this.updatePost(e)}
                     />
-                  <textarea name="text" className="form-control mb-2" placeholder="Rate 1-5!" 
-                    value={this.state.post}
-                    onChange={(e) => this.updatePost(e)}
-                  />
+                  <div>
+                    <StarRatingComponent 
+                      name="rate1" 
+                      starCount={5}
+                      value={rating}
+                      onStarClick={this.onStarClick.bind(this)}
+                    />
+                  </div>  
     
                   {/* Only show this if the post length is > 140 */}
-                  {this.state.post.length > 140 &&
-                    <small className="form-text">140 character limit!</small>
+                  {this.state.post.length > 150 &&
+                    <small className="form-text">150 character limit!</small>
                   }
                   
                   <div className="text-right">

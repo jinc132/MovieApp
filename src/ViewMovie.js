@@ -2,6 +2,8 @@ import React, { Component } from 'react'; //import React Component
 import { Button } from 'reactstrap';
 import _ from 'lodash';
 import './style.css';
+import ReviewBox from './ReviewBox';
+import ReviewList from './ReviewList';
 
 class MoviePage extends Component {
     constructor(props) {
@@ -19,6 +21,7 @@ class MoviePage extends Component {
     render() {
         let movie = this.state.movie;
         if (!movie) return <h2> No movie specified </h2>
+
         return (
             <div className="moviePage">
                 <main>
@@ -35,6 +38,12 @@ class MoviePage extends Component {
                     <div className="container">
                         <Button size="large" color="primary">Put in Basket</Button>
                         <Button size="large" color="second">Rate It!</Button>
+                    </div>
+                    <div>
+                            <ReviewBox currentUser ={this.props.reviewBox}>
+                                    
+                            </ReviewBox>
+                        <ReviewList currentUser ={this.props.reviewBox}></ReviewList>
                     </div>
                 </main>
             </div>
