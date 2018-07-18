@@ -106,3 +106,16 @@ footer{
 .likes {
     color: rgb(117, 202, 78);
 }
+
+.slick-slider .card {
+    width: 50%;
+    text-align:center;
+    left: 25%;
+
+}
+
+.slick-slider {
+    width: 80%;
+    margin-left: 10%;
+    
+}
