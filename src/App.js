@@ -6,7 +6,7 @@ import { Route, Switch, Redirect, NavLink } from 'react-router-dom';
 import './style.css';
 import SignUp from './SignUp';
 import firebase from 'firebase/app';
-import Carousel from './carousel';
+import MainCarousel from './MainCarousel';
 
 
 
@@ -85,8 +85,14 @@ class App extends Component {
         firebase.auth().signOut()
             .catch((err) => {
                 console.log(err);
-                this.setState({ errorMessage: err.message });
+                this.setState({ errorMessage: err.message, guest: true });
             })
+    }
+
+    handleClick(movie) {
+        let newReview = movie;
+        let tasksRef = firebase.database().ref('AddMovies');
+        tasksRef.push(newReview);
     }
 
     render() {
@@ -95,7 +101,7 @@ class App extends Component {
             return (
                 <main>
                     <Search search={this.searchDatabase} />
-                    <Carousel {...routerProps} movies={this.state.movies} />
+                    <MainCarousel {...routerProps} movies={this.state.movies} />
                     <div id="movieList">
                         <MovieList {...routerProps} movies={this.state.movies} />
                     </div>
@@ -105,7 +111,7 @@ class App extends Component {
 
         let renderMoviePage = (routerProps) => {
             return (
-                <MoviePage {...routerProps} movie={this.state.movies} reviewBox = {this.state.user}/>
+                <MoviePage {...routerProps} movie={this.state.movies} handleClick= {this.handleClick} reviewBox = {this.state.user}/>
             );
         }
 
@@ -117,28 +123,21 @@ class App extends Component {
                 </div>
             )
         }
-        if (!this.state.user) {
-            subject = (
+
+        let renderSignUp = (routerProps) => {
+            return (
                 <div className="container">
-                    <h1>We are <span>Fun Movies</span></h1>
-                    <p>Welcome! Log in to your account or register today to leave a review:</p>
-                    <SignUp
+                    <SignUp {...routerProps}
                         signUpCall={(email, pass, handle) => this.handleSignUp(email, pass, handle)}
                         signInCall={(email, pass) => this.handleSignIn(email, pass)}
                     />
                 </div>
             );
-        } else {
+        }
+
+        if (!this.state.user) {
             subject = (
                 <div>
-                    <div>
-                        {this.state.user &&
-                            <button className="btn btn-warning"
-                                onClick={() => this.handleSignOut()}>
-                                Log Out {this.state.user.displayName}
-                            </button>
-                        }
-                    </div>
                     <div>
                         <div>
                             <Navbar color="light" light expand="md">
@@ -150,10 +149,10 @@ class App extends Component {
                                             <NavLink exact to="/" activeClassName="activeLink" className="nav-link">View Movies</NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink to="/login" activeClassName="activeLink" className="nav-link">Login</NavLink>
+                                            <NavLink to="/about" activeClassName="activeLink" className="nav-link">About Us</NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink to="/about" activeClassName="activeLink" className="nav-link">About Us</NavLink>
+                                            <NavLink to="/login" activeClassName="activeLink" className="nav-link">Login</NavLink>
                                         </NavItem>
                                     </Nav>
                                 </Collapse>
@@ -162,7 +161,42 @@ class App extends Component {
                         <div className="container">
                             <Switch>
                                 <Route exact path='/' render={renderMovieFunction} />
-                                <Route path='/login' component={subject} />
+                                <Route path='/login' render={renderSignUp} />
+                                <Route path='/movie/:name' render={renderMoviePage} />
+                                <Redirect to='/' />
+                            </Switch>
+                        </div>
+                    </div>
+                </div>
+            );
+        } else {
+            subject = (
+                <div>
+                    <div>
+                        <div>
+                            <Navbar color="light" light expand="md">
+                                <NavbarBrand href="/"><i className="fa fa-film"> MovRate</i></NavbarBrand>
+                                <NavbarToggler onClick={this.toggleMenu} />
+                                <Collapse isOpen={this.state.isOpen} navbar>
+                                    <Nav className="ml-auto" navbar>
+                                        <NavItem>
+                                            <NavLink exact to="/" activeClassName="activeLink" className="nav-link">View Movies</NavLink>
+                                        </NavItem>
+                                        <NavItem>
+                                            <NavLink to="/about" activeClassName="activeLink" className="nav-link">About Us</NavLink>
+                                        </NavItem>
+                                        <NavItem>
+                                            <button className="btn btn-warning" onClick={() => this.handleSignOut()}> Log Out {this.state.user.displayName}
+                                            </button>
+                                        </NavItem>
+                                    </Nav>
+                                </Collapse>
+                            </Navbar>
+                        </div>
+                        <div className="container">
+                            <Switch>
+                                <Route exact path='/' render={renderMovieFunction} />
+                                <Route path='/login' render={renderSignUp} />
                                 <Route path='/movie/:name' render={renderMoviePage} />
                                 <Route path='/review/:name' render={renderMoviePage} />
                                 <Redirect to='/' />
@@ -191,7 +225,7 @@ class App extends Component {
     encode(movie) {
         movie.map((elem) => {
             let name = elem.title.replace(/\W/g, '_');
-            elem.name = name;
+            return (elem.name = name);
         });
     }
     toggleMenu() {

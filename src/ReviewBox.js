@@ -13,6 +13,7 @@ export default class ReviewBox extends Component {
 
     onStarClick(nextValue) {
       this.setState({rating: nextValue});
+      this.state = {post:'', rating: 1};
     }
 
     updatePost(event) {

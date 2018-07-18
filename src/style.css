@@ -1,5 +1,5 @@
 body {
-    background-color: grey;
+    background-color: white;
 }
 
 footer{
@@ -36,7 +36,7 @@ footer{
     align-items: center;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.864);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
 }
 
 .movie-deck .card .card-body {
@@ -60,12 +60,33 @@ footer{
     text-align: center;
 }
 
-.moviePage .info{
+.moviePage .info {
     text-align: center;
+    padding: 1em;
 }
 
-.imageContainer img {
-    justify-content: center;
-    align-items: center;
-    flex: 1;
+.moviePage .info img {
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
+}
+
+.carousel-item img{
+    width: 100%; 
+    height: auto; 
+}
+
+.carousel-caption {
+    color: rgb(255, 255, 255);
+    text-shadow: 1.5px 1.5px rgba(214, 204, 204, 0.85);
+    bottom: unset;
+    top: 20px;
+    font-size: 32px;
+}
+
+.fa {
+    font-size: 25px;
+}
+
+.buttons {
+    text-align: center;
+    
 }
