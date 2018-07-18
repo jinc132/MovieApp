@@ -7,6 +7,7 @@ import './style.css';
 import SignUp from './SignUp';
 import firebase from 'firebase/app';
 import MainCarousel from './MainCarousel';
+import AboutCarousel from './AboutCarousel';
 
 
 class App extends Component {
@@ -215,6 +216,7 @@ class App extends Component {
                     <footer>Data from
                         <a href="https://www.themoviedb.org/documentation/api?language=en">The Movie DB</a>
                     </footer>
+                    <AboutCarousel/>
                 </main>
             </div>
         );
