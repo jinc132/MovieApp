@@ -1,5 +1,5 @@
 body {
-    background-color: grey;
+    background-color: white;
 }
 
 footer{
@@ -36,7 +36,7 @@ footer{
     align-items: center;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.864);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
 }
 
 .movie-deck .card .card-body {
@@ -74,4 +74,8 @@ footer{
     bottom: unset;
     top: 20px;
     font-size: 32px;
+}
+
+.fa {
+    font-size: 25px;
 }
