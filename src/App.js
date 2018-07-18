@@ -5,9 +5,8 @@ import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reac
 import { Route, Switch, Redirect, NavLink } from 'react-router-dom';
 import './style.css';
 import SignUp from './SignUp';
-import firebase from 'firebase/app'
-import Image from './image';
-import Carousel from './carousel'
+import firebase from 'firebase/app';
+import Carousel from './carousel';
 
 
 class App extends Component {
@@ -16,6 +15,7 @@ class App extends Component {
         this.searchDatabase = this.searchDatabase.bind(this);
         this.toggleMenu = this.toggleMenu.bind(this);
         this.state = {
+            selectedMovie: '',
             movies: [],
             isOpen: false,
             loading: true,
@@ -38,6 +38,7 @@ class App extends Component {
             .then((data) => {
                 this.setState({ movies: data.results });
             });
+
         this.authUnRegFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
             if (firebaseUser) {
                 this.setState({ user: firebaseUser, loading: false });
@@ -49,7 +50,6 @@ class App extends Component {
     componentWillUnmount() {
         this.authUnRegFunc();
     }
-
 
     handleSignUp(email, password, handle) {
         this.setState({ errorMessage: null });
@@ -89,17 +89,26 @@ class App extends Component {
     }
 
     render() {
+        this.encode(this.state.movies);
         let renderMovieFunction = (routerProps) => {
             return (
                 <main>
                     <Search search={this.searchDatabase} />
                     <Carousel />
                     <div id="movieList">
-                        <MovieList {...routerProps} movies={this.state.movies} />
+                        <MovieList {...routerProps} movie={this.state.movies} />
                     </div>
                 </main>
             );
         }
+
+        let renderMoviePage = (routerProps) => {
+            console.log(this.state.movies);
+            return (
+                <MoviePage {...routerProps} movie={this.state.movies} />
+            );
+        }
+
         let subject = null;
         if (this.state.loading) {
             return (
@@ -154,7 +163,7 @@ class App extends Component {
                             <Switch>
                                 <Route exact path='/' render={renderMovieFunction} />
                                 <Route path='/login' component={subject} />
-                                <Route path='/movie/:title' component={MoviePage} />
+                                <Route path='/movie/:name' render={renderMoviePage} />
                                 <Redirect to='/' />
                             </Switch>
                         </div>
@@ -176,6 +185,13 @@ class App extends Component {
                 </main>
             </div>
         );
+    }
+
+    encode(movie) {
+        movie.map((elem) => {
+            let name = elem.title.replace(/\W/g, '_');
+            elem.name = name;
+        });
     }
 
     toggleMenu() {
@@ -214,9 +230,8 @@ class MovieCard extends Component {
 
     render() {
         let movieCard = this.props.movieCard;
-
         if (this.state.shouldRedirect) {
-            return <Redirect push to={'/movie/' + movieCard.title} />;
+            return <Redirect push to={'/movie/' + movieCard.name} />;
         }
         return (
             <div className="card" onClick={() => this.handleClick()}>
@@ -237,14 +252,17 @@ export class Search extends Component {
         this.changeSearch = this.changeSearch.bind(this);
         this.clickButton = this.clickButton.bind(this);
     }
+
     changeSearch(e) {
         this.setState({ value: e.target.value });
         console.log(e.target.value)
     }
+
     clickButton() {
         this.props.search(this.state.value);
         console.log("button")
     }
+
     render() {
         return (
             <div className="searchMovie">

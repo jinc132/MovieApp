@@ -15,10 +15,10 @@ class Carousel extends Component {
       <div className="slider">
         <Slider {...settings}>
           <div>
-            <img className="slideimg" src={"img1.jpg"} />
+            <img className="slideimg" src={"img1.jpg"} alt="film image"/>
           </div>
           <div>
-            <img className="slideimg" src={"img2.jpg"} /> 
+            <img className="slideimg" src={"img2.jpg"} alt="second film image"/> 
           </div>
         </Slider>
       </div>

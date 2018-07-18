@@ -54,3 +54,12 @@ footer{
 .modal-backdrop {
     opacity: .7;
 }
+
+.moviePage Button {
+    margin: 1rem;
+    text-align: center;
+}
+
+.moviePage .info{
+    text-align: center;
+}
