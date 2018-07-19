@@ -113,7 +113,7 @@ class App extends Component {
 
         let renderMoviePage = (routerProps) => {
             return (
-                <MoviePage {...routerProps} movie={this.state.movies} handleClick={this.handleClick} userStatus={this.state.user} reviewBox = {this.state.user}/>
+                <MoviePage {...routerProps} movie={this.state.movies} handleClick={this.handleClick} userStatus={this.state.user} reviewBox={this.state.user} />
             );
         }
 
@@ -137,12 +137,20 @@ class App extends Component {
             );
         }
 
+        let renderBasket = (routerProps) => {
+            return (
+                <div>
+                    <Carousel user={this.state.user} />
+                </div>
+            );
+        }
+
         if (!this.state.user) {
             subject = (
                 <div>
                     <div>
                         <div>
-                            <Navbar className= "titleBar" light expand="md">
+                            <Navbar className="titleBar" light expand="md">
                                 <NavbarBrand href="/"><i className="fa fa-film"> MovieRate</i></NavbarBrand>
                                 <NavbarToggler onClick={this.toggleMenu} />
                                 <Collapse isOpen={this.state.isOpen} navbar>
@@ -176,7 +184,7 @@ class App extends Component {
                 <div>
                     <div>
                         <div>
-                            <Navbar className= "titleBar" light expand="md">
+                            <Navbar className="titleBar" light expand="md">
                                 <NavbarBrand href="/"><i className="fa fa-film"> MovieRate</i></NavbarBrand>
                                 <NavbarToggler onClick={this.toggleMenu} />
                                 <Collapse isOpen={this.state.isOpen} navbar>
@@ -186,6 +194,9 @@ class App extends Component {
                                         </NavItem>
                                         <NavItem>
                                             <NavLink to="/about" activeClassName="activeLink" className="nav-link">About Us</NavLink>
+                                        </NavItem>
+                                        <NavItem>
+                                            <NavLink to="/basket" activeClassName="activeLink" className="nav-link"><i className="fa fa-shopping-basket" aria-label="movie basket" /> </NavLink>
                                         </NavItem>
                                         <NavItem>
                                             <button className="btn btn-warning" onClick={() => this.handleSignOut()}> Log Out {this.state.user.displayName}
@@ -200,7 +211,7 @@ class App extends Component {
                                 <Route exact path='/' render={renderMovieFunction} />
                                 <Route path='/login' render={renderSignUp} />
                                 <Route path='/movie/:name' render={renderMoviePage} />
-                                <Route path='/review/:name' render={renderMoviePage} />
+                                <Route path='/basket' render={renderBasket} />
                                 <Redirect to='/' />
                             </Switch>
                         </div>
@@ -218,9 +229,8 @@ class App extends Component {
                     {subject}
                     <footer>Data from
                         <a href="https://www.themoviedb.org/documentation/api?language=en">The Movie DB</a>
-                        <Carousel user={this.state.user}/>
                     </footer>
-                   
+
                 </main>
             </div>
         );
@@ -274,10 +284,10 @@ class MovieCard extends Component {
         return (
             <div className="card" onClick={() => this.handleClick()}>
                 <figure>
-                <img className="card-img-top" src={'http://image.tmdb.org/t/p/w200//' + movieCard.poster_path} alt={movieCard.title} />
-                <figcaption className="card-body">
-                    <p className="card-date">{movieCard.release_date}</p>
-                </figcaption>
+                    <img className="card-img-top" src={'http://image.tmdb.org/t/p/w200//' + movieCard.poster_path} alt={movieCard.title} />
+                    <figcaption className="card-body">
+                        <p className="card-date">{movieCard.release_date}</p>
+                    </figcaption>
                 </figure>
             </div>
         );
