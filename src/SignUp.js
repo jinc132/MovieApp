@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './SignUp.css';
+import './style.css';
 
 class SignUp extends Component {
   constructor(props) {
@@ -38,10 +38,8 @@ class SignUp extends Component {
 
   render() {
     return (
-      <form>
-        <h1>We are <span>Fun Movies</span></h1>
-        <p>Welcome! Log in to your account or register today to leave a review:</p>
-        {/* email */}
+      <form className='signUp'>
+        <h1>CUSTOMER LOGIN</h1>
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input className="form-control"
@@ -52,7 +50,6 @@ class SignUp extends Component {
           />
         </div>
 
-        {/* password */}
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input className="form-control"
@@ -63,9 +60,8 @@ class SignUp extends Component {
           />
         </div>
 
-        {/* handle */}
         <div className="form-group">
-          <label htmlFor="handle">Nick Name (no input need for Sign-in)</label>
+          <label htmlFor="handle">Nick Name</label>
           <input className="form-control"
             id="handle"
             name="handle"
@@ -74,14 +70,13 @@ class SignUp extends Component {
         </div>
 
 
-        {/* buttons */}
         <div className="form-group">
-          <button className="btn btn-primary mr-2"
+          <button className="btn btn-default mr-2"
             onClick={(e) => this.handleSignUp(e)}
           >
             Sign-up
             </button>
-          <button className="btn btn-primary"
+          <button className="btn btn-default"
             onClick={(e) => this.handleSignIn(e)}
           >
             Sign-in

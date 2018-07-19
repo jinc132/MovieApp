@@ -141,8 +141,8 @@ class App extends Component {
                 <div>
                     <div>
                         <div>
-                            <Navbar color="light" light expand="md">
-                                <NavbarBrand href="/"><i className="fa fa-film"> MovRate</i></NavbarBrand>
+                            <Navbar className= "titleBar" light expand="md">
+                                <NavbarBrand href="/"><i className="fa fa-film"> MovieRate</i></NavbarBrand>
                                 <NavbarToggler onClick={this.toggleMenu} />
                                 <Collapse isOpen={this.state.isOpen} navbar>
                                     <Nav className="ml-auto" navbar>
@@ -175,8 +175,8 @@ class App extends Component {
                 <div>
                     <div>
                         <div>
-                            <Navbar color="light" light expand="md">
-                                <NavbarBrand href="/"><i className="fa fa-film"> MovRate</i></NavbarBrand>
+                            <Navbar className= "titleBar" light expand="md">
+                                <NavbarBrand href="/"><i className="fa fa-film"> MovieRate</i></NavbarBrand>
                                 <NavbarToggler onClick={this.toggleMenu} />
                                 <Collapse isOpen={this.state.isOpen} navbar>
                                     <Nav className="ml-auto" navbar>
@@ -271,11 +271,12 @@ class MovieCard extends Component {
         }
         return (
             <div className="card" onClick={() => this.handleClick()}>
+                <figure>
                 <img className="card-img-top" src={'http://image.tmdb.org/t/p/w200//' + movieCard.poster_path} alt={movieCard.title} />
-                <div className="card-body">
-                    <h3 className="card-title">{movieCard.title}</h3>
+                <figcaption className="card-body">
                     <p className="card-date">{movieCard.release_date}</p>
-                </div>
+                </figcaption>
+                </figure>
             </div>
         );
     }

@@ -46,15 +46,17 @@ class MoviePage extends Component {
             <div className="moviePage">
                 <main>
                     <div className="info .col-sm-12 .col-md-6 .col-md-offset-3">
+                        <div className="wrapper">
                         <h2>{movie.title}</h2>
+                        </div>
                         <img src={'http://image.tmdb.org/t/p/w200//' + movie.poster_path} alt={movie.poster_path} />
                         <h3>Release Date</h3>
                         <p>{movie.release_date}</p>
                         <h3>Vote Average</h3>
                         <p>{movie.vote_average}</p>
                     </div>
-                    <h3>Overview</h3>
-                    <p>{movie.overview}</p>
+                    <h3 className="overview">Overview</h3>
+                    <p className="overview">{movie.overview}</p>
                     <div className="buttons">
                         {buttons}
                     </div>
