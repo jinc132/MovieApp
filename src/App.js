@@ -212,12 +212,9 @@ class App extends Component {
                                 <Route exact path='/' render={renderMovieFunction} />
                                 <Route path='/login' render={renderSignUp} />
                                 <Route path='/movie/:name' render={renderMoviePage} />
-<<<<<<< HEAD
                                 <Route path='/about' component={About} />
                                 <Route path='/review/:name' render={renderMoviePage} />
-=======
                                 <Route path='/basket' render={renderBasket} />
->>>>>>> 4f852aa745940568f76776fb4b989ceda44c0aaf
                                 <Redirect to='/' />
                             </Switch>
                         </div>
