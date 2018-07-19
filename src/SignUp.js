@@ -12,26 +12,23 @@ class SignUp extends Component {
     };
   }
 
-  //update state for specific field
   handleChange(event) {
-    let field = event.target.name; //which input
-    let value = event.target.value; //what value
+    let field = event.target.name;
+    let value = event.target.value; 
 
-    let changes = {}; //object to hold changes
-    changes[field] = value; //change this field
-    this.setState(changes); //update state
+    let changes = {}; 
+    changes[field] = value;
+    this.setState(changes); 
   }
 
-  //handle signUp button
   handleSignUp(event) {
-    event.preventDefault(); //don't submit
+    event.preventDefault(); 
     this.props.signUpCall(this.state.email, this.state.password, this.state.handle);
     this.props.history.push('/');
   }
 
-  //handle signIn button
   handleSignIn(event) {
-    event.preventDefault(); //don't submit
+    event.preventDefault(); 
     this.props.signInCall(this.state.email, this.state.password);
     this.props.history.push('/');
   }

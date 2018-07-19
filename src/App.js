@@ -8,6 +8,7 @@ import SignUp from './SignUp';
 import firebase from 'firebase/app';
 import MainCarousel from './MainCarousel';
 import Carousel from './carousel';
+import About from './About.js';
 
 
 
@@ -164,7 +165,7 @@ class App extends Component {
                             <Switch>
                                 <Route exact path='/' render={renderMovieFunction} />
                                 <Route path='/login' render={renderSignUp} />
-                                <Route path='/movie/:name' render={renderMoviePage} />
+                                <Route path='/about' component={About} />
                                 <Redirect to='/' />
                             </Switch>
                         </div>
@@ -200,6 +201,7 @@ class App extends Component {
                                 <Route exact path='/' render={renderMovieFunction} />
                                 <Route path='/login' render={renderSignUp} />
                                 <Route path='/movie/:name' render={renderMoviePage} />
+                                <Route path='/about' component={About} />
                                 <Route path='/review/:name' render={renderMoviePage} />
                                 <Redirect to='/' />
                             </Switch>
@@ -218,7 +220,6 @@ class App extends Component {
                     {subject}
                     <footer>Data from
                         <a href="https://www.themoviedb.org/documentation/api?language=en">The Movie DB</a>
-                        <Carousel user={this.state.user}/>
                     </footer>
                    
                 </main>

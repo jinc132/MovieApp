@@ -4,6 +4,7 @@ import AboutCarousel from './AboutCarousel';
 class About extends Component{
     render(){
         return(
+            <div className="about">
             <main>   
                     <AboutCarousel/>
                     <div className="aboutContent">
@@ -15,10 +16,7 @@ class About extends Component{
                             </div>
                     </div>
             </main>
-            
-            <footer>Data from
-                <a href="https://www.themoviedb.org/documentation/api?language=en">The Movie DB</a>
-            </footer>
+            </div>
         )
     }
 }

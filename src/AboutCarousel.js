@@ -17,11 +17,6 @@ const items = [
     src: '/img2.jpg',
     altText: 'Movie picture2',
     caption: 'Use basket to compare multiple movies at the same time'
-  },
-  {
-    src: '/img3.jpg',
-    altText: 'Movie picture 3',
-    caption: 'Enjoy your Movies!'
   }
 ];
 

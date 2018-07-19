@@ -83,7 +83,6 @@ class ReviewItem extends Component {
 
           <div className="rating">{review.rating}<i className="fa fa-star"></i></div>
 
-          {/* A section for showing chirp likes */}
           <div className="likes">          
             <i className={'fa fa-thumbs-up '+(userLikes ? 'user-liked': '')} aria-label="like" onClick={() => this.likeReview()} ></i>            
             <span>{/*space*/} {likeCount}</span>
