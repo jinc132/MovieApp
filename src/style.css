@@ -158,6 +158,7 @@ footer{
     color: rgb(117, 202, 78);
 }
 
+<<<<<<< HEAD
 .signUp h1 {
     font-family: Oswald;
     font-size: 30px;
@@ -195,3 +196,17 @@ footer{
     background-color: #757474; /* Green */
     color: white;
 }
+=======
+.slick-slider .card {
+    width: 50%;
+    text-align:center;
+    left: 25%;
+
+}
+
+.slick-slider {
+    width: 80%;
+    margin-left: 10%;
+    
+}
+>>>>>>> f877abcb13c07c5fecd132e67abe730924d40730
