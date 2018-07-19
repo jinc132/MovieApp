@@ -70,7 +70,7 @@ export class Carousel extends Component {
       )
     } else {
       let cards = this.state.movies.map((key) => {
-        return <Card movieCard={key} key={key.id} uid={this.props.user.uid} remove={this.props.remove}/>
+        return <Card key={key.id} movieCard={key} uid={this.props.user.uid} remove={this.props.remove}/>
       });
       slider = (
         <Slider {...settings}>
