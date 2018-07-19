@@ -192,6 +192,14 @@ footer{
     transition-duration: 0.3s
 }
 
+<<<<<<< HEAD
+=======
+.signUp button {
+    background-color: #757474; /* Green */
+    color: white;
+}
+
+>>>>>>> 4f852aa745940568f76776fb4b989ceda44c0aaf
 .slick-slider .card {
     width: 50%;
     text-align:center;
@@ -203,4 +211,8 @@ footer{
     width: 80%;
     margin-left: 10%;
     
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4f852aa745940568f76776fb4b989ceda44c0aaf

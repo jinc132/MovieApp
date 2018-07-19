@@ -29,14 +29,13 @@ class MoviePage extends Component {
             buttons = (
                 <div>
                     <Button disabled size="large" color="secondary" onClick={() => this.props.handleClick(movie)}>Put in Basket</Button>
-                    <Button size="large" color="success" onClick={() => this.props.history.push('/login')}>Rate It!</Button>
+
                 </div>
             )
         } else {
             buttons = (
                 <div>
                     <Button size="large" color="success" onClick={() => this.props.handleClick(movie, this.props.userStatus.uid)}>Put in Basket</Button>
-                    <Button size="large" color="success">Rate It!</Button>
                 </div>
             )
         }
