@@ -139,7 +139,7 @@ footer{
 }
 
 .fa {
-    font-size: 25px;
+    font-size: 26px;
 }
 
 .buttons {
@@ -214,6 +214,7 @@ footer{
     font-size: 15px;
     font-weight: bold;
 }
+
 @media only screen and (min-width: 750px) {
     .carouselCard {
         font-size: 15px;
@@ -244,3 +245,29 @@ footer{
     margin-left: 10%;
 }
 
+.nav-link {
+    margin-right: 1.5rem;
+}
+
+.modal-body img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.modal-content {
+    text-align: center;
+}
+
+.modal-header .modal-title {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modal-content .btn-primary {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}

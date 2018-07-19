@@ -141,7 +141,7 @@ class App extends Component {
         let renderBasket = (routerProps) => {
             return (
                 <div>
-                    <Carousel user={this.state.user} />
+                    <Carousel {...routerProps} user={this.state.user} />
                 </div>
             );
         }
@@ -173,6 +173,7 @@ class App extends Component {
                             <Switch>
                                 <Route exact path='/' render={renderMovieFunction} />
                                 <Route path='/login' render={renderSignUp} />
+                                <Route path='/movie/:name' render={renderMoviePage} />
                                 <Route path='/about' component={About} />
                                 <Redirect to='/' />
                             </Switch>
@@ -213,8 +214,7 @@ class App extends Component {
                                 <Route path='/login' render={renderSignUp} />
                                 <Route path='/movie/:name' render={renderMoviePage} />
                                 <Route path='/about' component={About} />
-                                <Route path='/review/:name' render={renderMoviePage} />
-                                <Route path='/basket' render={renderBasket} />
+                                <Route path="/basket" render={renderBasket} />
                                 <Redirect to='/' />
                             </Switch>
                         </div>
@@ -231,7 +231,7 @@ class App extends Component {
                         <p className="alert alert-danger">{this.state.errorMessage} </p>}
                     {subject}
                     <footer>Data from
-                        <a href="https://www.themoviedb.org/documentation/api?language=en">The Movie DB</a>
+                        <a href="https://www.themoviedb.org/documentation/api?language=en"> The Movie DB</a>
                     </footer>
 
                 </main>

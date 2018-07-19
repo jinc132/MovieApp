@@ -1,9 +1,9 @@
-import React, { Component } from 'react'; //import React Component
-import { Button } from 'reactstrap';
+import React, { Component } from 'react';
 import _ from 'lodash';
 import './style.css';
 import ReviewBox from './ReviewBox';
 import ReviewList from './ReviewList';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Media } from 'reactstrap';
 
 class MoviePage extends Component {
     constructor(props) {
@@ -29,13 +29,30 @@ class MoviePage extends Component {
             buttons = (
                 <div>
                     <Button disabled size="large" color="secondary" onClick={() => this.props.handleClick(movie)}>Put in Basket</Button>
-
+                    <div>
+                        <Modal className="modalPopup" isOpen={true} fade={false}>
+                            <ModalHeader>Warning!</ModalHeader>
+                            <ModalBody>
+                                <img src={'/sorry.png'} alt='Warning' />
+                                <div className="warning">
+                                    <h3>Welcome new Guest? </h3>
+                                    <p>Hello! and Sorry! If you want to continue viewing this movie's information please either sign-in or sign-up via our login page.</p>
+                                </div>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="primary" onClick={() => this.props.history.push('/login')}>Go to Login</Button>
+                            </ModalFooter>
+                        </Modal>
+                    </div>
                 </div>
             )
         } else {
             buttons = (
                 <div>
                     <Button size="large" color="success" onClick={() => this.props.handleClick(movie, this.props.userStatus.uid)}>Put in Basket</Button>
+                    <ReviewBox currentUser={this.props.reviewBox} currentMovie={movie}>
+                    </ReviewBox>
+                    <ReviewList currentUser={this.props.reviewBox} currentMovie={movie}></ReviewList>
                 </div>
             )
         }
@@ -46,7 +63,7 @@ class MoviePage extends Component {
                 <main>
                     <div className="info .col-sm-12 .col-md-6 .col-md-offset-3">
                         <div className="wrapper">
-                        <h2>{movie.title}</h2>
+                            <h2>{movie.title}</h2>
                         </div>
                         <img src={'http://image.tmdb.org/t/p/w200//' + movie.poster_path} alt={movie.poster_path} />
                         <h3>Release Date</h3>
@@ -60,10 +77,7 @@ class MoviePage extends Component {
                         {buttons}
                     </div>
                     <div>
-                        <ReviewBox currentUser={this.props.reviewBox} currentMovie={movie}>
 
-                        </ReviewBox>
-                        <ReviewList currentUser={this.props.reviewBox} currentMovie={movie}></ReviewList>
                     </div>
                 </main>
             </div>

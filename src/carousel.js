@@ -67,6 +67,7 @@ export class Carousel extends Component {
 class Card extends Component {
   render() {
     let movieCard = this.props.movieCard;
+    console.log(movieCard.name);
     return (
       <div>
         <div className="carouselCard">
