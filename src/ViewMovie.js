@@ -3,7 +3,7 @@ import _ from 'lodash';
 import './style.css';
 import ReviewBox from './ReviewBox';
 import ReviewList from './ReviewList';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Media } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class MoviePage extends Component {
     constructor(props) {

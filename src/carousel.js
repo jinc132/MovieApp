@@ -2,6 +2,7 @@ import './style.css';
 import React, { Component } from "react";
 import Slider from "react-slick";
 import firebase from 'firebase/app';
+import {Button} from 'reactstrap';
 
 export class Carousel extends Component {
 
@@ -20,9 +21,15 @@ export class Carousel extends Component {
       let snap = snapshot.val();
       if (snap) {
         let keys = Object.keys(snap);
-        let array = keys.map((key) => {
-          snap[key].key = key;
-          return snap[key]
+        let array = [];
+        keys.map((key) => {
+          basketRef.child(key).once('value', function (snapshot) {
+            let val = snapshot.val();
+            let key = Object.keys(val);
+            val.key = key;
+            array.push(val[key]);
+          });
+          return array;
         });
         this.setState({
           movies: array,
@@ -63,7 +70,7 @@ export class Carousel extends Component {
       )
     } else {
       let cards = this.state.movies.map((key) => {
-        return <Card movieCard={key} />
+        return <Card movieCard={key} key={key.id} uid={this.props.user.uid} remove={this.props.remove}/>
       });
       slider = (
         <Slider {...settings}>
@@ -86,17 +93,18 @@ export class Carousel extends Component {
 class Card extends Component {
   render() {
     let movieCard = this.props.movieCard;
-
+    let uid = this.props.uid;
     return (
       <div>
         <div className="carouselCard">
-          <div className="card">
+          <div className="card" >
             <img className="card-img-top" src={'http://image.tmdb.org/t/p/w185//' + movieCard.poster_path} alt={movieCard.title} />
             <div className="card-body">
               <h3 className="card-title">{movieCard.title}</h3>
               <p className="card-date">{movieCard.release_date}</p>
               <p className="card-popularity">{"Popularity: " + movieCard.popularity}</p>
               <p className="card-review">{"Vote Average: " + movieCard.vote_average}</p>
+              <Button onClick={() => this.props.remove(movieCard.name, uid)}>Remove</Button>
             </div>
           </div>
         </div>
