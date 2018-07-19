@@ -36,7 +36,6 @@ class MoviePage extends Component {
             buttons = (
                 <div>
                     <Button size="large" color="success" onClick={() => this.props.handleClick(movie, this.props.userStatus.uid)}>Put in Basket</Button>
-                    <Button size="large" color="success">Rate It!</Button>
                 </div>
             )
         }

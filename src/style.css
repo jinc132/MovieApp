@@ -195,3 +195,16 @@ footer{
     background-color: #757474; /* Green */
     color: white;
 }
+
+.slick-slider .card {
+    width: 50%;
+    text-align:center;
+    left: 25%;
+
+}
+
+.slick-slider {
+    width: 80%;
+    margin-left: 10%;
+    
+}
