@@ -230,8 +230,9 @@ class App extends Component {
                     {this.state.errorMessage &&
                         <p className="alert alert-danger">{this.state.errorMessage} </p>}
                     {subject}
-                    <footer>Data from
-                        <a href="https://www.themoviedb.org/documentation/api?language=en"> The Movie DB</a>
+                    <footer>
+                        Data from<a href="https://www.themoviedb.org/documentation/api?language=en"> The Movie DB </a>&
+                        About Us Pictures from<a href="https://unsplash.com/search/photos/movie"> Unsplash</a>
                     </footer>
 
                 </main>
