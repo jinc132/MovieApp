@@ -52,13 +52,23 @@ export class Carousel extends Component {
   }
 
   render() {
-    const settings = {
+    let settings = {
       dots: true,
       infinite: true,
       speed: 500,
-      slidesToShow: 2,
-      slidesToScroll: 2
+      slidesToShow: 1,
+      slidesToScroll: 1
     };
+
+    if(this.state.movies.length > 1){
+      settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 2,
+        slidesToScroll: 2
+      };
+    } 
 
     let slider = undefined;
     if (this.state.emptyBasket) {
