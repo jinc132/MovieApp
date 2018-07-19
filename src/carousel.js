@@ -17,17 +17,22 @@ export class Carousel extends Component {
     let basketRef = firebase.database().ref('baskets').child(this.props.user.uid);
     basketRef.on('value', (snapshot) => {
       let snap = snapshot.val();
-      let keys = Object.keys(snap);
-      let array = keys.map((key) => {
-        snap[key].key = key;
-        return snap[key]
-      });
-      if (array) {
-        this.setState({
-          movies: array,
-          basketRef: basketRef
-        })
-      } else {
+      if(snap){
+        let keys = Object.keys(snap);
+        let array = keys.map((key) => {
+          snap[key].key = key;
+          return snap[key]
+        });
+        if (array) {
+          this.setState({
+            movies: array,
+            basketRef: basketRef
+          })
+        } else {
+          return null;
+        }
+      }
+      else{
         return null;
       }
     });
@@ -67,7 +72,7 @@ export class Carousel extends Component {
 class Card extends Component {
   render() {
     let movieCard = this.props.movieCard;
-    console.log(movieCard.name);
+
     return (
       <div>
         <div className="carouselCard">
@@ -84,6 +89,7 @@ class Card extends Component {
       </div>
     );
   }
+  
 
 
 }
