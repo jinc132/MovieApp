@@ -200,15 +200,36 @@ footer{
 
 .carouselCard {
     font-family: Oswald;
-    font-size: 15px;
+    font-size: 7px;
     line-height: 1.5;
     color: #665e5e;
-    font-weight: bold;
     display: block;
     letter-spacing: 2px;
     margin: auto;
     text-align: center;
     padding: 10px;
+}
+
+.carouselCard .card-title {
+    font-size: 15px;
+    font-weight: bold;
+}
+@media only screen and (min-width: 750px) {
+    .carouselCard {
+        font-size: 15px;
+    }  
+    .carouselCard .card-title {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (min-width: 1100px) {
+    .carouselCard {
+        font-size: 17px;
+    }  
+    .carouselCard .card-title {
+        font-size: 22px;
+    }
 }
 
 .slick-slider .card {
@@ -221,5 +242,5 @@ footer{
 .slick-slider {
     width: 80%;
     margin-left: 10%;
-    
 }
+
