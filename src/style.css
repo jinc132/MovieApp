@@ -117,16 +117,29 @@ footer{
 
 .moviePage .info img {
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16), 0 2px 3px rgba(0, 0, 0, 0.23);
-    float:left;
 }
 
 .basketB button {
     background-color: #504646;
     color: white;
-    margin-right:80%;
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s
     
+}
+
+@media only screen and (min-width: 770px) {
+    .moviePage .info img{
+        float:left;
+    }
+    .basketB button {
+        margin-left:32%;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .basketB button {
+        margin-left:24%;
+    }
 }
 
 .carousel-item img{
@@ -294,6 +307,12 @@ footer{
     flex-wrap: wrap;
     flex-basis: 200px;
     flex: auto;
+}
+
+.modal-content .modal-title {
+    margin-left:auto;
+    margin-right:auto;
+    color:red;
 }
 
 
