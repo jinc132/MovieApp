@@ -9,7 +9,8 @@ export class Carousel extends Component {
     super(props);
     this.state = {
       movies: [],
-      basketRef: undefined
+      basketRef: undefined,
+      emptyBasket: false
     };
   }
 
@@ -17,23 +18,22 @@ export class Carousel extends Component {
     let basketRef = firebase.database().ref('baskets').child(this.props.user.uid);
     basketRef.on('value', (snapshot) => {
       let snap = snapshot.val();
-      if(snap){
+      if (snap) {
         let keys = Object.keys(snap);
         let array = keys.map((key) => {
           snap[key].key = key;
           return snap[key]
         });
-        if (array) {
-          this.setState({
-            movies: array,
-            basketRef: basketRef
-          })
-        } else {
-          return null;
-        }
+        this.setState({
+          movies: array,
+          basketRef: basketRef,
+          emptyBasket: false
+        })
       }
-      else{
-        return null;
+      else {
+        this.setState({
+          emptyBasket: true
+        })
       }
     });
   }
@@ -52,18 +52,32 @@ export class Carousel extends Component {
       slidesToShow: 2,
       slidesToScroll: 2
     };
-    // let keys = Object.keys(this.state.movies);
-    let cards = this.state.movies.map((key) => {
-      return <Card movieCard={key} />
-    })
+
+    let slider = undefined;
+    if (this.state.emptyBasket) {
+      slider = (
+        <div className="empty-basket-msg">
+          <h3>Nothing in here right now</h3>
+          <img src='/emptyHere.png' alt='empty here face' />
+        </div>
+      )
+    } else {
+      let cards = this.state.movies.map((key) => {
+        return <Card movieCard={key} />
+      });
+      slider = (
+        <Slider {...settings}>
+
+          {cards}
+
+        </Slider>
+      )
+    }
+
     return (
       <div className="carouselCard ">
         <h2> My Basket </h2>
-        <Slider {...settings}>
-
-            {cards}
-
-        </Slider>
+        {slider}
       </div>
     );
   }
@@ -76,20 +90,20 @@ class Card extends Component {
     return (
       <div>
         <div className="carouselCard">
-        <div className="card">
-          <img className="card-img-top" src={'http://image.tmdb.org/t/p/w185//' + movieCard.poster_path} alt={movieCard.title} />
-          <div className="card-body">
-            <h3 className="card-title">{movieCard.title}</h3>
-            <p className="card-date">{movieCard.release_date}</p>
-            <p className="card-popularity">{"Popularity: " + movieCard.popularity}</p>
-            <p className="card-review">{"Vote Average: " + movieCard.vote_average}</p>
+          <div className="card">
+            <img className="card-img-top" src={'http://image.tmdb.org/t/p/w185//' + movieCard.poster_path} alt={movieCard.title} />
+            <div className="card-body">
+              <h3 className="card-title">{movieCard.title}</h3>
+              <p className="card-date">{movieCard.release_date}</p>
+              <p className="card-popularity">{"Popularity: " + movieCard.popularity}</p>
+              <p className="card-review">{"Vote Average: " + movieCard.vote_average}</p>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     );
   }
-  
+
 
 
 }

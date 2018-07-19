@@ -215,6 +215,14 @@ footer{
     font-weight: bold;
 }
 
+.empty-basket-msg {
+    padding: 3rem;  
+}
+
+.empty-basket-msg img {
+    margin: 4rem;
+}
+
 @media only screen and (min-width: 750px) {
     .carouselCard {
         font-size: 15px;
