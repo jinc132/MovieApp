@@ -52,7 +52,7 @@ export class Carousel extends Component {
       return <Card movieCard={key} />
     })
     return (
-      <div>
+      <div className="carouselCard ">
         <h2> My Basket </h2>
         <Slider {...settings}>
 
@@ -69,12 +69,16 @@ class Card extends Component {
     let movieCard = this.props.movieCard;
     return (
       <div>
+        <div className="carouselCard">
         <div className="card">
           <img className="card-img-top" src={'http://image.tmdb.org/t/p/w185//' + movieCard.poster_path} alt={movieCard.title} />
           <div className="card-body">
             <h3 className="card-title">{movieCard.title}</h3>
             <p className="card-date">{movieCard.release_date}</p>
+            <p className="card-popularity">{"Popularity: " + movieCard.popularity}</p>
+            <p className="card-review">{"Vote Average: " + movieCard.vote_average}</p>
           </div>
+        </div>
         </div>
       </div>
     );

@@ -198,9 +198,17 @@ footer{
     transition-duration: 0.3s
 }
 
-.signUp button {
-    background-color: #757474; 
-    color: white;
+.carouselCard {
+    font-family: Oswald;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #665e5e;
+    font-weight: bold;
+    display: block;
+    letter-spacing: 2px;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
 }
 
 .slick-slider .card {
