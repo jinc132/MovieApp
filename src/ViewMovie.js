@@ -28,7 +28,9 @@ class MoviePage extends Component {
         if (!this.props.userStatus) {
             buttons = (
                 <div>
-                    <Button disabled size="large" color="secondary" onClick={() => this.props.handleClick(movie)}>Put in Basket</Button>
+                    <div className="basketB">
+                    <Button disabled onClick={() => this.props.handleClick(movie)}>Put in Basket</Button>
+                    </div>
                     <div>
                         <Modal className="modalPopup" isOpen={true} fade={false}>
                             <ModalHeader>Warning!</ModalHeader>
@@ -49,7 +51,9 @@ class MoviePage extends Component {
         } else {
             buttons = (
                 <div>
-                    <Button size="large" color="success" onClick={() => this.props.handleClick(movie, this.props.userStatus.uid)}>Put in Basket</Button>
+                    <div className="basketB">
+                    <Button onClick={() => this.props.handleClick(movie, this.props.userStatus.uid)}>Put in Basket</Button>
+                    </div>
                     <ReviewBox currentUser={this.props.reviewBox} currentMovie={movie}>
                     </ReviewBox>
                     <ReviewList currentUser={this.props.reviewBox} currentMovie={movie}></ReviewList>

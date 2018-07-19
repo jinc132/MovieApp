@@ -232,7 +232,8 @@ class App extends Component {
                     {subject}
                     <footer>
                         Data from<a href="https://www.themoviedb.org/documentation/api?language=en"> The Movie DB </a>&
-                        About Us Pictures from<a href="https://unsplash.com/search/photos/movie"> Unsplash</a>
+                        About Us Pictures from<a href="https://unsplash.com/search/photos/movie"> Unsplash </a>&
+                        All icons from<a href="https://www.iconfinder.com/"> IconFinder </a>
                     </footer>
 
                 </main>

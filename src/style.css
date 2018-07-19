@@ -120,6 +120,15 @@ footer{
     float:left;
 }
 
+.basketB button {
+    background-color: #504646;
+    color: white;
+    margin-right:80%;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s
+    
+}
+
 .carousel-item img{
     width: 100%; 
     height: auto; 
