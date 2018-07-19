@@ -77,7 +77,7 @@ class ReviewItem extends Component {
         
         <div className="col pl-4 pl-lg-1">
 
-          <span className="handle">{review.userName} {/*space*/}</span>
+          <span className="handle">{review.userName}</span>
 
           <div className="review">{review.text}</div>
 
@@ -85,7 +85,7 @@ class ReviewItem extends Component {
 
           <div className="likes">          
             <i className={'fa fa-thumbs-up '+(userLikes ? 'user-liked': '')} aria-label="like" onClick={() => this.likeReview()} ></i>            
-            <span>{/*space*/} {likeCount}</span>
+            <span>{likeCount}</span>
           </div>
         </div>
       </div>      

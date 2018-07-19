@@ -68,6 +68,7 @@ class SignUp extends Component {
 
 
         <div className="form-group">
+          <div className="button">
           <button className="btn btn-default mr-2"
             onClick={(e) => this.handleSignUp(e)}
           >
@@ -78,6 +79,7 @@ class SignUp extends Component {
           >
             Sign-in
             </button>
+          </div>
         </div>
       </form>
     )

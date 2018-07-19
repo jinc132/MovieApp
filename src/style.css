@@ -89,7 +89,7 @@ footer{
 
 .moviePage Button {
     margin: 1rem;
-    text-align: center;
+    text-align: left;
 }
 
 .moviePage .wrapper {
@@ -170,9 +170,10 @@ footer{
 
 .likes {
     color: rgb(117, 202, 78);
+    float:left;
 }
 
-.signUp h1 {
+.signUp h1, .form-group {
     font-family: Oswald;
     font-size: 30px;
     line-height: 1.5;
@@ -187,16 +188,7 @@ footer{
 }
 
 .signUp .form-group {
-    font-family: Oswald;
-    font-size: 18px;
-    line-height: 1.5;
-    color: #757474;
-    font-weight: bold;
-    display: block;
-    letter-spacing: 2px;
-    padding-top: 20px;
-    margin: auto;
-    width: 50%;
+    font-size:18px;
     text-align: left;
 }
 
@@ -205,6 +197,10 @@ footer{
     color: white;
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s
+}
+
+.signUp .form-group .button {
+    text-align: center;
 }
 
 .carouselCard {
@@ -277,7 +273,7 @@ footer{
     text-align: center;
 }
 
-.modal-header .modal-title {
+.modal-header .modal-title,  {
     width: 40%;
     margin-left: auto;
     margin-right: auto;
