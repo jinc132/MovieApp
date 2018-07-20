@@ -2,7 +2,7 @@
   "name": "movieApp",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jinc132.github.io/movieApp/",
+  "homepage": "https://jinc132.github.io/MovieApp/",
   "dependencies": {
     "ajv": "^6.5.2",
     "bootstrap": "^4.1.2",
