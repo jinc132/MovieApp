@@ -34,7 +34,7 @@ class MoviePage extends Component {
                         <Modal className="modalPopup" isOpen={true} fade={false}>
                             <ModalHeader>Warning!</ModalHeader>
                             <ModalBody>
-                                <img src={'/sorry.png'} alt='Warning' />
+                                <img src={'https://cdn0.iconfinder.com/data/icons/streamline-emoji-1/48/102-weary-cat-face-512.png'} alt='Warning' />
                                 <div className="warning">
                                     <h3>Welcome new Guest? </h3>
                                     <p>Hello! and Sorry! If you want to continue viewing this movie's information please either sign-in or sign-up via our login page.</p>

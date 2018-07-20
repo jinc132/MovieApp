@@ -75,7 +75,7 @@ export class Carousel extends Component {
       slider = (
         <div className="empty-basket-msg">
           <h3>Nothing in here right now</h3>
-          <img src='/emptyHere.png' alt='empty here face' />
+          <img src='https://cdn0.iconfinder.com/data/icons/popo_emotions_the_blacy_png/128/nothing.png' alt='empty here face' />
         </div>
       )
     } else {
