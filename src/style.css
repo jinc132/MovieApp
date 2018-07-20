@@ -128,23 +128,18 @@ footer{
 .basketB button {
     background-color: #504646;
     color: white;
+    margin-right:auto;
+    margin-left:auto;
+    margin-top:50px;
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s
+
     
 }
 
 @media only screen and (min-width: 770px) {
     .moviePage .info img{
         float:left;
-    }
-    .basketB button {
-        margin-left:32%;
-    }
-}
-
-@media only screen and (min-width: 1000px) {
-    .basketB button {
-        margin-left:20%;
     }
 }
 
