@@ -330,7 +330,12 @@ export class Search extends Component {
     }
 
     clickButton() {
-        this.props.search(this.state.value);
+        console.log(this.state.value.length)
+        if(this.state.value.length === 0){
+            alert("You forgot to type anything");
+        }else{
+            this.props.search(this.state.value);
+        }
     }
 
     render() {
