@@ -166,6 +166,11 @@ footer{
     color: rgb(253, 253, 253); 
 }
 
+.slick-prev:before, .slick-next:before {
+    color: grey;
+    font-size: 32px;
+}
+
 .fa {
     font-size: 26px;
 }

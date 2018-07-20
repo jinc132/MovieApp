@@ -19,7 +19,6 @@ class App extends Component {
         this.searchDatabase = this.searchDatabase.bind(this);
         this.toggleMenu = this.toggleMenu.bind(this);
         this.state = {
-            selectedMovie: '',
             movies: [],
             isOpen: false,
             loading: true,

@@ -105,7 +105,7 @@ class Card extends Component {
     let movieCard = this.props.movieCard;
     let uid = this.props.uid;
     return (
-      <div clasName="carouselCard">
+      <div className="carouselCard">
           <div className="card" >
             <img className="card-img-top" src={'http://image.tmdb.org/t/p/w185//' + movieCard.poster_path} alt={movieCard.title} />
             <div className="card-body">
