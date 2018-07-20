@@ -9,12 +9,12 @@ import {
 
 const items = [
   {
-    src: '/img1.jpg',
+    src: 'https://images.unsplash.com/photo-1485095329183-d0797cdc5676?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2405fa5a688f4c925fa1b8f6959174f8&auto=format&fit=crop&w=1500&q=80',
     altText: 'Movie picture1',
     caption: 'Pick a movie and provide a comment for other users'
   },
   {
-    src: '/img2.jpg',
+    src: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=40aeba3c68446f98649f5bf962faf5f0&auto=format&fit=crop&w=1040&q=80',
     altText: 'Movie picture2',
     caption: 'Use basket to compare multiple movies at the same time'
   }
