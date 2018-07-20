@@ -112,7 +112,6 @@ class App extends Component {
         movieRef.child(name).remove();
     }
 
-
     render() {
         this.encode(this.state.movies);
         let renderMovieFunction = (routerProps) => {
@@ -215,7 +214,7 @@ class App extends Component {
                                         <NavItem>
                                             <NavLink to="/basket" activeClassName="activeLink" className="nav-link">
                                                 <i className="fa fa-shopping-basket" aria-label="movie basket" />
-                                                <Badge color="info">{() => this.totalItems(this.state.user.uid)}</Badge>
+                                                <Badge color="info">{this.state.totItems}</Badge>
                                             </NavLink>
                                         </NavItem>
                                         <NavItem>
@@ -331,9 +330,9 @@ export class Search extends Component {
 
     clickButton() {
         console.log(this.state.value.length)
-        if(this.state.value.length === 0){
+        if (this.state.value.length === 0) {
             alert("You forgot to type anything");
-        }else{
+        } else {
             this.props.search(this.state.value);
         }
     }
