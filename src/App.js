@@ -201,7 +201,7 @@ class App extends Component {
                     <div>
                         <div>
                             <Navbar className="titleBar" light expand="md">
-                                <NavbarBrand href="/"><i className="fa fa-film"> MovieRate</i></NavbarBrand>
+                                <NavbarBrand href="/"><i className="fa fa-film" aria-label="movie logo"> MovieRate</i></NavbarBrand>
                                 <NavbarToggler onClick={this.toggleMenu} />
                                 <Collapse isOpen={this.state.isOpen} navbar>
                                     <Nav className="ml-auto" navbar>
