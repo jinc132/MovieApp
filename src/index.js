@@ -1,22 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+
+import App from './App';
+
+var config = {
+    apiKey: "AIzaSyBF1YaslR54pyTusagirNPzwO7DbRiCrh8",
+    authDomain: "movieproject-d3fdc.firebaseapp.com",
+    databaseURL: "https://movieproject-d3fdc.firebaseio.com",
+    projectId: "movieproject-d3fdc",
+    storageBucket: "movieproject-d3fdc.appspot.com",
+    messagingSenderId: "440752183141"
+};
+firebase.initializeApp(config);
 // let myIndex = 0;
 // carousel();
 
-// function carousel() {
-//     let i;
-//     let x = document.getElementsByClassName("mySlides");
-//     for (i = 0; i < x.length; i++) {
-//        x[i].style.display = "none";  
-//     }
-//     myIndex++;
-//     if (myIndex > x.length) {myIndex = 1}    
-//     x[myIndex-1].style.display = "block";  
-//     setTimeout(carousel, 4000); 
-// }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
