@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MovieRow from './MovieRow';
 import MoviePage from './ViewMovie';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Badge } from 'reactstrap';
 import { Route, Switch, Redirect, NavLink } from 'react-router-dom';
 import './style.css';
 import SignUp from './SignUp';
@@ -91,7 +91,7 @@ class App extends Component {
             })
     }
 
-    handleClick(movie, uid) {
+    addItem(movie, uid) {
         let newMovie = movie;
         let basketRef = firebase.database().ref('baskets').child(uid);
         basketRef.once('value', function (snapshot) {
@@ -107,10 +107,11 @@ class App extends Component {
         });
     }
 
-    remove(name, uid) {
+    removeItem(name, uid) {
         let movieRef = firebase.database().ref('baskets').child(uid);
         movieRef.child(name).remove();
     }
+
 
     render() {
         this.encode(this.state.movies);
@@ -128,7 +129,7 @@ class App extends Component {
 
         let renderMoviePage = (routerProps) => {
             return (
-                <MoviePage {...routerProps} movie={this.state.movies} handleClick={this.handleClick} userStatus={this.state.user} reviewBox={this.state.user} />
+                <MoviePage {...routerProps} movie={this.state.movies} handleClick={this.addItem} userStatus={this.state.user} reviewBox={this.state.user} />
             );
         }
 
@@ -155,7 +156,7 @@ class App extends Component {
         let renderBasket = (routerProps) => {
             return (
                 <div>
-                    <Carousel {...routerProps} user={this.state.user} remove={this.remove} />
+                    <Carousel {...routerProps} user={this.state.user} remove={this.removeItem} />
                 </div>
             );
         }
@@ -212,7 +213,10 @@ class App extends Component {
                                             <NavLink to="/about" activeClassName="activeLink" className="nav-link">About Us</NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink to="/basket" activeClassName="activeLink" className="nav-link"><i className="fa fa-shopping-basket" aria-label="movie basket" /> </NavLink>
+                                            <NavLink to="/basket" activeClassName="activeLink" className="nav-link">
+                                                <i className="fa fa-shopping-basket" aria-label="movie basket" />
+                                                <Badge color="info">{() => this.totalItems(this.state.user.uid)}</Badge>
+                                            </NavLink>
                                         </NavItem>
                                         <NavItem>
                                             <button className="btn btn-warning" onClick={() => this.handleSignOut()}> Log Out {this.state.user.displayName}
