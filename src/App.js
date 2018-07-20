@@ -94,7 +94,22 @@ class App extends Component {
     handleClick(movie, uid) {
         let newMovie = movie;
         let basketRef = firebase.database().ref('baskets').child(uid);
-        basketRef.push(newMovie);
+        basketRef.once('value', function (snapshot) {
+            let snap = snapshot.val();
+            if (snap) {
+                let keys = Object.keys(snap);
+                if (!keys.includes(movie.name)) {
+                    basketRef.child(movie.name).push(newMovie);
+                }
+            } else {
+                basketRef.child(movie.name).push(newMovie);
+            }
+        });
+    }
+
+    remove(name, uid) {
+        let movieRef = firebase.database().ref('baskets').child(uid);
+        movieRef.child(name).remove();
     }
 
     render() {
@@ -140,7 +155,7 @@ class App extends Component {
         let renderBasket = (routerProps) => {
             return (
                 <div>
-                    <Carousel {...routerProps} user={this.state.user} />
+                    <Carousel {...routerProps} user={this.state.user} remove={this.remove} />
                 </div>
             );
         }
@@ -316,11 +331,9 @@ export class Search extends Component {
 
     render() {
         return (
-            
             <div className="searchMovie">
                 <input type="text" className="search" name="q" placeholder="Search Movie" onChange={this.changeSearch} />
-                <button type="button" className="button" 
-                onClick={this.clickButton}><i className="fa fa-search" onClick={this.clickButton}></i></button>
+                <button type="button" className="button" onClick={this.clickButton}><i className="fa fa-search" onClick={this.clickButton}></i></button>
             </div>
         )
     }
