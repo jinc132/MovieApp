@@ -81,7 +81,7 @@ class ReviewItem extends Component {
 
           <div className="review">{review.text}</div>
 
-          <div className="rating">{review.rating}<i className="fa fa-star"></i></div>
+          <div className="rating">{review.rating}<i className="fa fa-star" aria-label="star ratings"></i></div>
 
           <div className="likes">          
             <i className={'fa fa-thumbs-up '+(userLikes ? 'user-liked': '')} aria-label="like" onClick={() => this.likeReview()} ></i>            
