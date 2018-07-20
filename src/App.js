@@ -214,7 +214,6 @@ class App extends Component {
                                         <NavItem>
                                             <NavLink to="/basket" activeClassName="activeLink" className="nav-link">
                                                 <i className="fa fa-shopping-basket" aria-label="movie basket" />
-                                                <Badge color="info">{this.state.totItems}</Badge>
                                             </NavLink>
                                         </NavItem>
                                         <NavItem>
